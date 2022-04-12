@@ -15,3 +15,5 @@ Information with a completed booking details after confirmation is sent to the t
 - Material Ui
 
 ## Published
+
+https://magia-5bd20.web.app/
