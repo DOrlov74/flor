@@ -1,5 +1,5 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Container, IconButton, InputAdornment, Typography } from "@mui/material";
+import { IconButton, InputAdornment, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -96,7 +96,7 @@ export default function SigninForm() {
     };
 
     return(
-        <Container 
+        <Box 
             sx={containerStyle}>
             <Box
                 maxWidth="sm"
@@ -185,6 +185,6 @@ export default function SigninForm() {
                     {language ? 'Enviar' : 'Submit'}
                 </Button>
             </Box>
-        </Container>
+        </Box>
     );
 }

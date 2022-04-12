@@ -59,9 +59,6 @@ export default function Home() {
                     {language ? 'por marcação' : 'by appointment'}
                 </Typography>
             </Stack>
-            {/* <Typography variant="h2" sx={promoStyle}>
-                25 &euro;
-            </Typography> */}
             <Button color="secondary" size="large" disableRipple sx={buttonStyle} component={Link} to="/book">
                 {language ? 'Marcar agora' : 'Book now'}
             </Button>

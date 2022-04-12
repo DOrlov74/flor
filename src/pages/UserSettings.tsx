@@ -68,7 +68,7 @@ export default function UserSettings() {
 
     return(
         <>
-        {user && <Container 
+        {user && <Box 
             sx={containerStyle}>
             <Box
                 component="form"
@@ -142,6 +142,6 @@ export default function UserSettings() {
                     <Button sx={buttonStyle} size="large" type="submit">{language ? 'Guardar' : 'Save'}</Button>
                 </Stack>
             </Box>
-        </Container>}</>
+        </Box>}</>
     );
 }

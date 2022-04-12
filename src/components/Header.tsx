@@ -256,11 +256,6 @@ export default function Header(){
                             <Typography textAlign="center">Signin</Typography>
                         </MenuItem> 
                         }
-                        {/* {settings.map((setting) => (
-                            <MenuItem key={setting.Name} onClick={handleCloseUserMenu} component={Link} to={setting.LinkTo}>
-                                <Typography textAlign="center">{setting.Name}</Typography>
-                            </MenuItem>
-                        ))} */}
                     </Menu>
                 </Box>
                 <Box sx={{ minHeight: '48px', alignSelf: 'center', flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
@@ -307,14 +302,6 @@ export default function Header(){
                             </Button>
                             </>
                         }
-                        {/* {settings.map((setting) => (
-                        <Button
-                            key={setting.Name}
-                            // component={Link} to={setting.LinkTo}
-                            sx={{ color: 'white', display: 'block' }}
-                            onClick={handleClickOpen}
-                        >{setting.Name}</Button>
-                        ))} */}
                     </Stack>
                 </Box>
             </Toolbar>

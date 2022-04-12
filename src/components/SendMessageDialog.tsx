@@ -89,6 +89,7 @@ export default function SendMessageDialog({open, handleClose}:Props) {
                     <TextField
                         margin="normal"
                         fullWidth
+                        multiline
                         variant="standard"
                         id="message"
                         name="message"

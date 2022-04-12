@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -81,7 +80,7 @@ export default function LoginForm() {
     };
 
     return(
-        <Container 
+        <Box 
             sx={containerStyle}>
             <Box
                 maxWidth="sm"
@@ -154,6 +153,6 @@ export default function LoginForm() {
                     {language ? 'Enviar' : 'Submit'}
                 </Button>
             </Box>
-        </Container>
+        </Box>
     );
 }
