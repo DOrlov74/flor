@@ -64,13 +64,14 @@ export default function Bookings() {
 
     const updateOutdatedStatus = (bookings: BookingDoc[]) => {
         const today = new Date();
-        bookings.forEach(b => {
+        const newBookings = bookings;
+        newBookings.forEach(b => {
             const d = parse(b.date, 'dd/MM/yyyy', new Date());
             if (isBefore(d, today)){
                 setBookingStatus(b, 'outdated', appMessageCtx);
             }
         });
-        setBookings(bookings);
+        setBookings(newBookings);
     };
 
     const handleCellClick = (
@@ -83,7 +84,10 @@ export default function Bookings() {
     };
 
     const handleDelete = () => {
-        if (selectedBooking) setBookingStatus(selectedBooking, 'deleted', appMessageCtx);
+        if (selectedBooking) {
+            setBookingStatus(selectedBooking, 'deleted', appMessageCtx);
+            setSelectedBooking({...selectedBooking, status: 'deleted'});
+        }
     };
 
     return(

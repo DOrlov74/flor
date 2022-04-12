@@ -79,7 +79,7 @@ export const createBookingDoc= async (book:Booking, appMessageCtx: AppMessageCon
             appMessageCtx?.setMessage({severity: 'success', message: `booking on ${date} ${hour} succesfully created`});
             await sendNotification(`New booking: \n
                 Name: ${displayName}, \nEmail: ${email}, \nPhone: ${phone},
-                 \nService: ${service}, \nAddress: ${address}, \nDate: ${date}, \nHour: ${hour}`);
+                 \nService: ${service}, \nAddress: ${address}, \nDate: ${date}, \nHour: ${hour}`, appMessageCtx);
             return true;
         } catch (e) {
             console.error('error creating booking, ', e);
@@ -168,7 +168,7 @@ export const setBookingStatus= async (book:BookingDoc, status: string, appMessag
             appMessageCtx?.setMessage({severity: 'success', message: `booking's status succesfully updated`});
             await sendNotification(`Booking status changed to ${status}: 
                 \nName: ${book.displayName}, \nEmail: ${book.email}, \nPhone: ${book.phone},
-                 \nService: ${book.service}, \nAddress: ${book.address}, \nDate: ${book.date}, \nHour: ${book.hour}`);
+                 \nService: ${book.service}, \nAddress: ${book.address}, \nDate: ${book.date}, \nHour: ${book.hour}`, appMessageCtx);
         } catch (e) {
             console.error(`error updating booking's status, `, e);
             appMessageCtx?.setMessage({severity: 'error', message: `error updating booking, ${e}`});

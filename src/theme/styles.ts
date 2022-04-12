@@ -6,7 +6,7 @@ export const containerStyle = {
     backgroundSize: 'cover',
     position: 'relative',
     width: '100%',
-    height: 'calc(100vh - 128px)',
+    minHeight: 'calc(100vh - 128px)',
     padding: '1.5rem',
     display: 'flex',
     alignItems: 'center',

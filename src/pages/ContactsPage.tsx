@@ -43,7 +43,7 @@ export default function ContactsPage() {
                     <Card>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                    {language ? 'Morada em Lisboa' : 'Our Lisbon address'}
+                                    {language ? 'Lisboa' : 'Lisbon'}
                             </Typography>
                             <Box sx={mapContainerStyle} >
                                 <iframe 
@@ -63,7 +63,7 @@ export default function ContactsPage() {
                     <Card>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                {language ? 'Morada em Alfragide' : 'Our Alfragide address'}
+                                {language ? 'Alfragide' : 'Alfragide'}
                             </Typography>
                             <Box sx={mapContainerStyle}>
                                 <iframe 

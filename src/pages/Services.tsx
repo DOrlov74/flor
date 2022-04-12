@@ -14,7 +14,7 @@ export default function Services(){
         justifyContent: 'space-evenly',
         gap: '2rem',
         width: '100%',
-        // height: '91.25vh',
+        minHeight: '91.25vh',
         padding: '1.5rem',
     } as const;
     return(
