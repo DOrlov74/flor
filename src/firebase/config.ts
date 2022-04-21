@@ -1,4 +1,4 @@
-import { initializeApp, getApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
@@ -11,9 +11,9 @@ export const app = initializeApp({
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 });
 
-export const config = () => {
-    console.log(getApp().options);
-}
+// export const config = () => {
+//     console.log(getApp().options);
+// }
 
 //make auth and firestore references
 const auth=getAuth(app);

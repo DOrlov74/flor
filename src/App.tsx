@@ -5,7 +5,6 @@ import theme from './theme/normal';
 import Header from './components/Header';
 import { Box, CssBaseline } from '@mui/material';
 import Home from './pages/Home';
-import { config } from './firebase/config';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import SigninForm from './components/SigninForm';
@@ -23,7 +22,6 @@ import UserSettings from './pages/UserSettings';
 import ContactsPage from './pages/ContactsPage';
 
 function App() {
-  config();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
