@@ -100,10 +100,10 @@ export default function ServicePage(){
                                 <>
                                 <Stack key={p.address} direction="row" spacing={5}>
                                     <Typography gutterBottom variant="body1" color={florSecondary[900]}>
-                                    Endereço: &ensp;  {p.address} 
+                                        {p.address} 
                                     </Typography>
                                     <Typography variant="body1" color={florSecondary[900]}>
-                                    Preço: &ensp;  {p.price} &euro;
+                                        {p.price} &euro;
                                     </Typography>
                                 </Stack>
                                 <Divider key={`${p.address}  ${p.price}`} />

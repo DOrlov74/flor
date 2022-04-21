@@ -56,7 +56,7 @@ export default function Home() {
                     {language ? 'em Lisboa e Alfragide' : 'in Lisbon and Alfragide'}
                 </Typography>
                 <Typography variant="h6" sx={promoStyle}>
-                    {language ? 'por marcação' : 'by appointment'}
+                    {language ? 'só por marcação' : 'by appointment'}
                 </Typography>
             </Stack>
             <Button color="secondary" size="large" disableRipple sx={buttonStyle} component={Link} to="/book">

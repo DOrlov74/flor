@@ -30,7 +30,7 @@ export default function Header(){
     
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState<string | boolean>(pages[0].EName);
 
     const [signin, setSignin] = useState(false);
     const [login, setLogin] = useState(false);
@@ -51,32 +51,40 @@ export default function Header(){
     };
 
     const handleCloseNavMenu = (event: any) => {
+        setValue(event.target.parentElement.id);
         setAnchorElNav(null);
     };
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
     const handleCloseUserMenu = (event: any) => {
         setAnchorElUser(null);
-        switch (event.currentTarget.name){
-            case 'login':
-                setLogin(true);
-                break;
-            case 'signin':
-                setSignin(true);
-                break;
-            case 'logout':
-                logout(appMessageCtx);
-                break;
-            case 'settings':
-                navigate('/settings');
-                break;
-            case 'bookings':
-                navigate('/bookings');
-                break;
+        if (event.currentTarget.name) {
+            setValue(false);
+            switch (event.currentTarget.name){
+                case 'login':
+                    setLogin(true);
+                    break;
+                case 'signin':
+                    setSignin(true);
+                    break;
+                case 'logout':
+                    logout(appMessageCtx);
+                    break;
+                case 'settings':
+                    navigate('/settings');
+                    break;
+                case 'bookings':
+                    navigate('/bookings');
+                    break;
+            }
         }
+    };
+
+    const handleUserItemSelect = () => {
+        setValue(false);
     };
 
     const handleLogout = () => {
@@ -128,7 +136,7 @@ export default function Header(){
                         }}
                         >
                         {pages.map((page) => (
-                            <MenuItem key={page.EName} onClick={handleCloseNavMenu} component={Link} to={page.LinkTo}>
+                            <MenuItem key={page.EName} id={page.EName} onClick={handleCloseNavMenu} component={Link} to={page.LinkTo}>
                                 <Typography textAlign="center">{language ? page.PName : page.EName}</Typography>
                             </MenuItem>
                         ))}
@@ -153,7 +161,7 @@ export default function Header(){
                         {pages.map((page) => (
                         <Tab
                             key={page.EName}
-                            // value={page.LinkTo}
+                            value={page.EName}
                             label={language ? page.PName : page.EName}
                             component={Link} to={page.LinkTo}
                             sx={{ color: 'white', display: 'block' }}
@@ -162,14 +170,13 @@ export default function Header(){
                     </Tabs>
                 </Box>
                 <IconButton onClick={HandleSwitchLang}>
-                    <Avatar
-                        //component="img"
-                        sx={{ height: 30, flexGrow: 0, display: 'flex' }}
+                    <img
+                        style={{ height: 24, flexGrow: 0, display: 'flex', marginRight: '1rem' }}
                         src={language ? english : portuguese} 
                         alt="Switch language logo"
                         />
                 </IconButton>
-                <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' }}}>
+                <Box sx={{ flexGrow: 0,  display: { xs: 'flex', md: 'none'}}}>
                     <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ px: '1rem' }}>
                         {user ? 
@@ -268,11 +275,13 @@ export default function Header(){
                             <Typography sx={{p: '0.5rem'}}>{user.displayName}</Typography>
                             <Button 
                                 sx={{ color: 'white', display: 'block', textTransform: 'none' }}
+                                onClick={handleUserItemSelect}
                                 component={Link} to='/settings'>
                                     {language ? 'Definições' : 'Settings'}
                             </Button>
                             <Button 
                                 sx={{ color: 'white', display: 'block', textTransform: 'none' }}
+                                onClick={handleUserItemSelect}
                                 component={Link} to='/bookings'>
                                     {language ? 'Marcações' : 'Bookings'}
                             </Button>
@@ -284,6 +293,7 @@ export default function Header(){
                             {user.role === 'admin' && 
                             <Button 
                                 sx={{ color: 'white', display: 'block', textTransform: 'none' }}
+                                onClick={handleUserItemSelect}
                                 component={Link} to='/vacancies'>
                                     {language ? 'Vagas' : 'Vacancies'}
                             </Button>}

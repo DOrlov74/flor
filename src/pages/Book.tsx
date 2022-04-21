@@ -43,7 +43,7 @@ export default function Book() {
 
     const steps = language ? [
         'Selectione o serviço',
-        'Selectione o endereço',
+        'Selectione a localização',
         'Selectione a data',
         'Selectione a hora',
         'Verifique e confirme',

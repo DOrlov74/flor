@@ -1,5 +1,5 @@
 import { DatePicker, TimePicker } from "@mui/lab";
-import { Button, Card, CardActions, CardContent, Chip, Container, Grid, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, Chip, Container, Grid, Stack, TextField, Typography } from "@mui/material";
 import { addDays, format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../components/LanguageProvider";
@@ -81,7 +81,7 @@ export default function Vacancies() {
     };
 
     return(
-        <Container 
+        <Box 
             sx={containerStyle}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
@@ -90,7 +90,7 @@ export default function Vacancies() {
                             <Typography gutterBottom variant="h5" component="div">
                                     {language ? 'As suas vagas' : 'Your vacancies'}
                                 </Typography>
-                            <Stack direction="row" spacing={1} sx={{my: '1rem'}}>
+                            <Stack direction="row" spacing={1} sx={{m: '1rem', flexWrap: 'wrap'}}>
                             {(vacancies.length > 0) ? 
                                 vacancies.map(v => (
                                     <Chip
@@ -145,7 +145,7 @@ export default function Vacancies() {
                             <Typography gutterBottom variant="h5" component="div">
                                 {language ? 'Horários disponíveis:' : 'Available Hours:'}
                             </Typography>
-                            <Stack direction="row" spacing={1} sx={{my: '1rem'}}>
+                            <Stack direction="row" spacing={1} sx={{m: '1rem', flexWrap: 'wrap'}}>
                             {selectedVacancy.hours.map(h => (
                                 <Chip key={h} label={h} onClick={handleHourClick} onDelete={handleHourDelete}/>
                             ))}
@@ -191,6 +191,6 @@ export default function Vacancies() {
                 </Grid>
                 
             </Grid>
-        </Container>
+        </Box>
     );
 }
