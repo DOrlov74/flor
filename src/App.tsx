@@ -20,6 +20,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import ResetPassForm from './components/ResetPassForm';
 import UserSettings from './pages/UserSettings';
 import ContactsPage from './pages/ContactsPage';
+import Privacy from './pages/Privacy';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/vacancies" element={<Vacancies/>}/>
             <Route path="/settings" element={<UserSettings/>}/>
             <Route path="/contacts" element={<ContactsPage/>}/>
+            <Route path="/privacy" element={<Privacy/>}/>
           </Routes>
           </LocalizationProvider>
           <MessageAlert/>

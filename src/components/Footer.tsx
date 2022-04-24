@@ -6,6 +6,7 @@ import { addresses } from "../content/addresses";
 import { LangContext } from "./LanguageProvider";
 import SendMessageDialog from "./SendMessageDialog";
 import TelegramIcon from '@mui/icons-material/Telegram';
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     const {language}=useContext(LangContext);
@@ -29,6 +30,12 @@ export default function Footer() {
                                 {language ? 'Enviar a mensagem' : 'Send a message' } 
                             </Typography>
                         </IconButton>
+                        <Divider color='white' orientation= "vertical" variant="middle" flexItem />
+                        <Typography variant={'body2'} 
+                            component={Link} to={'/privacy'} 
+                            sx={{color: 'white', textDecoration: 'none'}}>
+                            {language ? 'Política de privacidade' : 'Privacy policy' } 
+                        </Typography>
                 </Toolbar>
                 <SendMessageDialog open={messageDialog} handleClose={handleClose}/>
             </Container>

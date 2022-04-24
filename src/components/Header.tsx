@@ -98,7 +98,7 @@ export default function Header(){
     return (
         <AppBar position="static">
         <Container maxWidth="xl">
-            <Toolbar disableGutters>
+            <Toolbar disableGutters sx={{minHeight: '64px'}}>
                 <Box
                     component="img"
                     sx={{ height: 50, mr: 2, display: { xs: 'none', md: 'flex' } }}
