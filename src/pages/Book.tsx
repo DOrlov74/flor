@@ -1,5 +1,5 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Step, StepLabel, Stepper, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
-import { DatePicker } from "@mui/lab";
+import { Box, Button, CircularProgress, FormControl, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Step, StepLabel, Stepper, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
+import { CalendarPickerSkeleton, DatePicker } from "@mui/lab";
 import { useContext, useEffect, useState } from "react";
 import { Booking } from "../models/Booking";
 import { UserContext } from "../components/UserProvider";
@@ -11,7 +11,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { addresses } from "../content/addresses";
 import { MessageContext } from "../components/MessageProvider";
-import { createBookingDoc, createVacancyDoc, getVacancyByDate } from "../firebase/documents";
+import { createBookingDoc, createVacancyDoc, getVacancies, getVacancyByDate } from "../firebase/documents";
 import { buttonStyle, containerStyle, formStyle } from "../theme/styles";
 import { LangContext } from "../components/LanguageProvider";
 
@@ -29,8 +29,10 @@ export default function Book() {
     const [address, setAddress] = useState(addresses[0].address);
     const [hour, setHour] = useState('');
     const [next, setNext] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [created, setCreated] = useState(false);
     const [vacancy, setVacancy] = useState<Vacancy|null>(null);
+    const [vacancies, setVacancies] = useState<Vacancy[]>([]);
     const [activeBooking, setActiveBooking] = useState<Booking>({
         id: `${Date.now()}`,
         user: user,
@@ -66,6 +68,13 @@ export default function Book() {
         }
     }, [isMounted, user])
 
+    useEffect(() => {
+        if (user){
+            getVacancies(appMessageCtx).then(v => {
+            if (v) setVacancies(v);
+        })}
+    }, [user]);
+
     useEffect(()=>{
         if (id) {
             const serv = services.find(s => (s.id === id));
@@ -88,9 +97,11 @@ export default function Book() {
     const handleNext = () => {
         setNext(false);
         if (activeStep === steps.length - 1) {
+            setLoading(true);
             updateVacancy(hour);
             createBookingDoc(activeBooking, appMessageCtx).then((result) => {
                 if (result) setCreated(true);
+                setLoading(false);
             });
         }
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -199,9 +210,11 @@ export default function Book() {
     };
 
     function getHours(date:string){
+        setLoading(true);
         getVacancyByDate(date, appMessageCtx).then((v) => {
             if (v) setVacancy(v);
             else setVacancy(null);
+            setLoading(false);
         });
     }
 
@@ -258,51 +271,66 @@ export default function Book() {
                         </Select>
                     </FormControl>
                 </Box>}
-                {activeStep === 2 && <DatePicker
-                    minDate={addDays(new Date(), 1)}
-                    label="Select a date"
-                    value={value}
-                    onChange={(newValue) => {
-                        if (newValue){
-                            const d = format(newValue, 'dd/MM/yyyy');
-                            setValue(newValue);
-                            setActiveBooking({
-                                ...activeBooking,
-                                date: d});
-                            setNext(true);
-                            getHours(d);
-                        }
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                /> }
-                {activeStep === 2 && (activeBooking.date !== '') && (!vacancy || vacancy.hours.length === 0) && 
-                    <Typography sx={{color: 'red'}}>
+                {activeStep === 2 && <>
+                    <DatePicker
+                        minDate={addDays(new Date(), 1)}
+                        label="Select a date"
+                        value={value}
+                        loading={loading}
+                        allowSameDateSelection={true}
+                        inputFormat={'dd/MM/yyyy'}
+                        onChange={(newValue) => {
+                            if (newValue){
+                                const d = format(newValue, 'dd/MM/yyyy');
+                                setValue(newValue);
+                                setActiveBooking({
+                                    ...activeBooking,
+                                    date: d});
+                                setNext(true);
+                                getHours(d);
+                            }
+                        }}
+                        shouldDisableDate={(date => {
+                            if (vacancies.some(v => v.date === format(date, 'dd/MM/yyyy'))) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        })}
+                        renderInput={(params) => <TextField {...params} />}
+                        renderLoading={() => <CalendarPickerSkeleton />}
+                    /> 
+                    
+                </>}
+                {activeStep === 2 && (activeBooking.date !== '') && (!vacancy || vacancy.hours.length === 0) && !loading &&
+                    <Typography sx={{color: 'red', minHeight: '40px'}}>
                         {language ? 
                             'Não há horas livres para este dia, selecione outro dia.' : 
                             'There are no free hours for this day, please select another day.'}
                     </Typography>
                 }
-                {activeStep === 3 && ((vacancy && vacancy!.hours.length !== 0) ? <Box sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id="hour-select-label">{language ? 'Hora' : 'Hour'}</InputLabel>
-                        <Select
-                        labelId="hour-select-label"
-                        id="hour-select"
-                        value={hour}
-                        label="Select Hour"
-                        onChange={handleHourChange}
-                        >
-                        {vacancy!.hours.map((hour)=>(
-                        <MenuItem key={hour} value={hour}>{hour}</MenuItem>
-                        ))}
-                        </Select>
-                    </FormControl>
-                </Box> : 
-                <Typography sx={{color: 'red'}}>
-                    {language ? 
-                        'Não há horas livres para este dia, selecione outro dia.' : 
-                        'There are no free hours for this day, please select another day.'}
-                </Typography>
+                {activeStep === 3 && ((vacancy && vacancy!.hours.length !== 0) ? 
+                    <Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="hour-select-label">{language ? 'Hora' : 'Hour'}</InputLabel>
+                            <Select
+                            labelId="hour-select-label"
+                            id="hour-select"
+                            value={hour}
+                            label="Select Hour"
+                            onChange={handleHourChange}
+                            >
+                            {vacancy!.hours.map((hour)=>(
+                            <MenuItem key={hour} value={hour}>{hour}</MenuItem>
+                            ))}
+                            </Select>
+                        </FormControl>
+                    </Box> : 
+                    <Typography sx={{color: 'red', minHeight: '40px'}}>
+                        {language ? 
+                            'Não há horas livres para este dia, selecione outro dia.' : 
+                            'There are no free hours for this day, please select another day.'}
+                    </Typography>
                 )}
                 {activeStep === 4 && <Box sx={{ minWidth: 120 }}>
                     <Typography gutterBottom variant='h6' sx={{pb: 2}}>
@@ -356,51 +384,59 @@ export default function Book() {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    </Box>}
-                {activeStep === steps.length ? (
-                    created ? <>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        {language ? 'Todas as etapas concluídas - obrigado pela marcalão' : 'All steps completed - thank you for appointment'}
-                    </Typography>
-                    <DoneIcon color='success'/>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button sx={buttonStyle} onClick={handleReset} component={Link} to="/">
-                            {language ? 'Ir para a pagina Inicial' : 'Go to Home Page'}
-                        </Button>
                     </Box>
-                    </> : <>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        {language ? 
-                            'Desculpe, houve um erro ao criar a sua marcação. Por favor, tente novamente mais tarde.' : 
-                            'Sorry, there is an error with creating your appointment. Please, try again later.'}
-                    </Typography>
-                    <ErrorOutlineIcon color='error'/>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button sx={buttonStyle} onClick={handleReset}>Reset</Button>
-                    </Box>
-                    </>
-                ) : (
-                    <>
-                    {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
-                    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', p: 2 }}>
-                        <Button
-                        color="inherit"
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={buttonStyle} 
-                        >
-                        {language ? 'Voltar' : 'Back'}
-                        </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button sx={buttonStyle} onClick={handleNext} disabled={!next}>
-                        {language && ((activeStep === steps.length - 1) ? 'Confirmar' : 'Seguinte')}
-                        {!language && ((activeStep === steps.length - 1) ? 'Confirm' : 'Next')}
-                        </Button>
-                    </Box>
-                    </>
-                )}
+                }
+                {(activeStep === steps.length && !loading) ? (
+                        created ? <>
+                        <Typography sx={{ mt: 2, mb: 1 }}>
+                            {language ? 'Todas as etapas concluídas - obrigado pela marcação' : 'All steps completed - thank you for appointment'}
+                        </Typography>
+                        <DoneIcon color='success'/>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                            <Box sx={{ flex: '1 1 auto' }} />
+                            <Button sx={buttonStyle} onClick={handleReset} component={Link} to="/">
+                                {language ? 'Ir para a pagina Inicial' : 'Go to Home Page'}
+                            </Button>
+                        </Box>
+                        </> : <>
+                        <Typography sx={{ mt: 2, mb: 1 }}>
+                            {language ? 
+                                'Desculpe, houve um erro ao criar a sua marcação. Por favor, tente novamente mais tarde.' : 
+                                'Sorry, there is an error with creating your appointment. Please, try again later.'}
+                        </Typography>
+                        <ErrorOutlineIcon color='error'/>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                            <Box sx={{ flex: '1 1 auto' }} />
+                            <Button sx={buttonStyle} onClick={handleReset}>Reset</Button>
+                        </Box>
+                        </>
+                    ) : (
+                        <>
+                        {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
+                        {loading ? <CircularProgress/> :
+                            <Typography variant='body2' sx={{minHeight: '40px'}}>
+                                {language ? 
+                                    'Se não haver a data/hora precisa, entre em contacto conosco, por favor.' : 
+                                    'If there is no necessary date/hour, contact us, please.'}
+                            </Typography>}
+                        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', p: 2 }}>
+                            <Button
+                            color="inherit"
+                            disabled={activeStep === 0 || loading}
+                            onClick={handleBack}
+                            sx={buttonStyle} 
+                            >
+                            {language ? 'Voltar' : 'Back'}
+                            </Button>
+                            <Box sx={{ flex: '1 1 auto' }} />
+                            <Button sx={buttonStyle} onClick={handleNext} disabled={!next  || loading}>
+                            {language && ((activeStep === steps.length - 1) ? 'Confirmar' : 'Seguinte')}
+                            {!language && ((activeStep === steps.length - 1) ? 'Confirm' : 'Next')}
+                            </Button>
+                        </Box>
+                        </>
+                    )
+                }
             </Box>
         </Box>
     );

@@ -17,7 +17,7 @@ export default function Footer() {
     };
 
     return(
-        <AppBar position="absolute" sx={{top:'auto', bottom: '-64px', minHeight: '64px'}}>
+        <AppBar position="absolute" sx={{top:'auto', bottom: {xs:'-132px', md:'-64px'}, minHeight: {xs:'132px', md:'64px'}}}>
             <Container maxWidth="xl">
                 <Toolbar sx={{display: 'flex', flexDirection: {xs: 'column', md: 'row'} , justifyContent: 'space-around'}}>
                         <Typography variant={'body2'}>

@@ -8,7 +8,7 @@ export const signup = async (name:string, phone:string, email:string, password:s
     try {
         const {user}= await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(user,{displayName: name});
-        console.log("succesfully created", user);
+        //console.log("succesfully created", user);
         createUserDoc(user, {displayName: name, phone: phone}, appMessageCtx);
         appMessageCtx?.setMessage({severity: 'success', message: `user ${name} succesfully created`});
         return true;
@@ -75,7 +75,7 @@ export const logout= async (appMessageCtx: AppMessageContext | null)=>{
 export const logIn= async (email:string, password: string, appMessageCtx: AppMessageContext | null)=>{
     try {
         const {user}= await signInWithEmailAndPassword(auth, email, password);
-        console.log("succesfully logined", user);
+        //console.log("succesfully logined", user);
         appMessageCtx?.setMessage({severity: 'success', message: `${user.displayName} succesfully logined`});
         return true;
     } catch (error) {

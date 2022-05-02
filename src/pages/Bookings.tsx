@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardActions, CardContent, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { DataGrid, GridCallbackDetails, GridCellParams, GridColDef, MuiEvent} from "@mui/x-data-grid";
+import { DataGrid, GridCallbackDetails, GridCellParams, GridColDef, GridRenderCellParams, GridValueGetterParams, MuiEvent} from "@mui/x-data-grid";
 import { useContext, useEffect, useState } from "react";
 import { MessageContext } from "../components/MessageProvider";
 import { getBookings, getBookingsByEmail, setBookingStatus } from "../firebase/documents";
@@ -8,6 +8,8 @@ import { UserContext } from "../components/UserProvider";
 import { isBefore, parse } from "date-fns";
 import { buttonStyle, containerStyle } from "../theme/styles";
 import { LangContext } from "../components/LanguageProvider";
+import DoneIcon from '@mui/icons-material/Done';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const mdHeight = {
     height: 'calc(100vh - 128px - 6.5rem - 0.35em)'
@@ -48,18 +50,25 @@ export default function Bookings() {
         {
             field: 'hour',
             headerName: 'Hour',
-            width: 90,
+            width: 60,
         },
         {
             field: 'service',
             headerName: 'Service',
-            width: 110,
+            width: 180,
         },
         {
             field: 'status',
             headerName: 'Status',
             width: 100,
-        },
+            renderCell: (params: GridRenderCellParams<string>) => (
+                <>{params.row.status} &nbsp;
+                {params.row.status === 'active' ? 
+                    <DoneIcon color="success"/>:
+                    <ClearIcon color="secondary"/>}
+                </>
+            )
+        }
     ];
 
     const updateOutdatedStatus = (bookings: BookingDoc[]) => {
@@ -69,6 +78,7 @@ export default function Bookings() {
             const d = parse(b.date, 'dd/MM/yyyy', new Date());
             if (isBefore(d, today)){
                 setBookingStatus(b, 'outdated', appMessageCtx);
+                b.status = 'outdated';
             }
         });
         setBookings(newBookings);
@@ -78,7 +88,7 @@ export default function Bookings() {
         params: GridCellParams, 
         event: MuiEvent<React.MouseEvent>, 
         details: GridCallbackDetails) => {
-        console.log(params.row);
+        //console.log(params.row);
         const booking = bookings.find(b => b.id === params.row.id)
         if (booking) setSelectedBooking(booking);
     };
@@ -87,6 +97,7 @@ export default function Bookings() {
         if (selectedBooking) {
             setBookingStatus(selectedBooking, 'deleted', appMessageCtx);
             setSelectedBooking({...selectedBooking, status: 'deleted'});
+
         }
     };
 

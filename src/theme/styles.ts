@@ -6,7 +6,7 @@ export const containerStyle = {
     backgroundSize: 'cover',
     position: 'relative',
     width: '100%',
-    minHeight: 'calc(100vh - 128px)',
+    minHeight: { xs:'calc(100vh - 196px)', md:'calc(100vh - 128px)'},
     padding: '1.5rem',
     display: 'flex',
     alignItems: 'center',
@@ -38,4 +38,5 @@ export const formStyle = {
     backgroundColor: 'white',
     borderRadius: '5px',
     boxShadow: `10px 10px 5px ${florPrimary[700]}`,
+    zIndex: '1110'
 } as const;
