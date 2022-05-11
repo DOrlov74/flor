@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import { moveInLeft } from "../theme/animation"
 import { florPrimary, florSecondary } from "../theme/colors"
 import { LangContext } from "./LanguageProvider"
-
+import "@fontsource/comfortaa";
 
 const promoStyle = {
     my: '1rem',

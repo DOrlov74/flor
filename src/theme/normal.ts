@@ -1,5 +1,8 @@
 import { createTheme } from "@mui/material/styles";
 import { florPrimary } from "./colors";
+import "@fontsource/cairo";
+import "@fontsource/comfortaa";
+import "@fontsource/kaushan-script";
 
 const theme = createTheme({
     palette: {
