@@ -16,6 +16,8 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Divider, List, ListItem, ListItemText } from "@mui/material";
 import { containerStyle } from "../theme/styles";
+import { useContext } from "react";
+import { LangContext } from "../components/LanguageProvider";
 
 const images = {
     'therapeutic': therapeutic, 
@@ -29,6 +31,7 @@ const images = {
 export default function ServicePage(){
     const {id} = useParams<{id: string}>();
     const service = services.find(s => (s.id === id));
+    const {language}=useContext(LangContext);
     let image;
     Object.entries(images).find(([k, v]) => {
         if (k===id){
@@ -65,7 +68,7 @@ export default function ServicePage(){
                         <Box
                             component="div"
                             sx={imgStyle}>
-                            <img width='100%' src={image} alt={service?.name}/>
+                            <img width='100%' src={image} alt={language ? service?.name : service?.enName}/>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={6} >
@@ -73,14 +76,20 @@ export default function ServicePage(){
                             component="div"
                             sx={imgStyle}>
                             <Typography gutterBottom variant="h5" component="div">
-                                {service?.name}
+                                {language ? service?.name : service?.enName}
                             </Typography>
-                            {service?.content.map(c => (
+                            {language ? service?.content.map(c => (
                                 <Typography key={c} variant="body2" >
                                     {c}
                                 </Typography>
-                            ))}
-                            {service?.list && (<>
+                            )) : 
+                            service?.enContent.map(c => (
+                                <Typography key={c} variant="body2" >
+                                    {c}
+                                </Typography>
+                            ))
+                            }
+                            {language ? service?.list && (<>
                                 <Typography variant="body2" > Consiste na: </Typography>
                                 <List sx={{p: 0}}>
                                     {service?.list.map(li => (
@@ -90,10 +99,21 @@ export default function ServicePage(){
                                             </ListItemText>
                                         </ListItem>
                                     ))}
-                                </List></>)
+                                </List></>) :
+                                service?.enList && (<>
+                                    <Typography variant="body2" > Consiste na: </Typography>
+                                    <List sx={{p: 0}}>
+                                        {service?.enList.map(li => (
+                                            <ListItem key={li} sx={{py: 0}}>
+                                                <ListItemText primaryTypographyProps={{variant: "body2"}}>
+                                                - {li}
+                                                </ListItemText>
+                                            </ListItem>
+                                        ))}
+                                    </List></>)
                             }
                             <Typography variant="body1" color={florSecondary[900]}>
-                                Duração: &ensp; {service?.duration} min
+                                {language ? "Duração:" : "Duration:"} &ensp; {service?.duration} min
                             </Typography>
                             <Divider />
                                 {service?.prices.map((p) => (

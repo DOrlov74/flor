@@ -33,7 +33,7 @@ const images = {
 
 export default function AppCard({service}: Props){
   const {language}=useContext(LangContext);
-    const {id, name, prices, duration}= service;
+    const {id, name, enName, prices, duration}= service;
 
     let image;
     Object.entries(images).find(([k, v]) => {
@@ -53,10 +53,10 @@ export default function AppCard({service}: Props){
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {language ? name: enName}
         </Typography>
         <Typography variant="body1">
-            Duração: &ensp;  {duration} min
+          {language ? "Duração:" : "Duration"} &ensp;  {duration} min : 
         </Typography>
         <Divider />
             {prices.map((p) => (
