@@ -14,6 +14,7 @@ import { MessageContext } from "../components/MessageProvider";
 import { createBookingDoc, createVacancyDoc, getVacancies, getVacancyByDate } from "../firebase/documents";
 import { buttonStyle, containerStyle, formStyle } from "../theme/styles";
 import { LangContext } from "../components/LanguageProvider";
+import Footer from "../components/Footer";
 
 export default function Book() {
     const {language}=useContext(LangContext);
@@ -219,6 +220,7 @@ export default function Book() {
     }
 
     return(
+        <>
         <Box component="div"
             sx={containerStyle}>
             <Box
@@ -439,5 +441,7 @@ export default function Book() {
                 }
             </Box>
         </Box>
+        <Footer/>
+        </>
     );
 }

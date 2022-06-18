@@ -40,3 +40,11 @@ export const formStyle = {
     boxShadow: `10px 10px 5px ${florPrimary[700]}`,
     zIndex: '1110'
 } as const;
+
+export const cardStyle = {
+    width: {sx: '350px', md: '600px'},
+    margin: '1rem',
+    padding: '1rem',
+    borderRadius: '10px',
+    boxShadow: `5px 5px 5px ${florPrimary[900]}`,
+} as const;

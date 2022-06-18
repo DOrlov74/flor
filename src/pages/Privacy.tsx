@@ -1,5 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { useContext } from "react";
+import Footer from "../components/Footer";
 import { LangContext } from "../components/LanguageProvider";
 import { containerStyle } from "../theme/styles";
 
@@ -7,6 +8,7 @@ export default function Privacy(){
     const {language}=useContext(LangContext);
     
     return(
+        <>
         <Box component="div"
             sx={containerStyle}>
             <Paper sx={{maxWidth: 'md', p: '1rem'}}>
@@ -43,5 +45,7 @@ Ao aceder e utilizar este web site, o utilizador concorda expressamente com os t
                 </Typography>
             </Paper>
         </Box>
+        <Footer/>
+        </>
     );
 }

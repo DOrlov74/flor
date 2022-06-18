@@ -9,7 +9,8 @@ import { LangContext } from "./LanguageProvider"
 import "@fontsource/comfortaa";
 
 const promoStyle = {
-    my: '1rem',
+    textAlign: 'center',
+    m: '1rem',
     fontFamily: 'Comfortaa',
     fontWeight: 700,
     fontStyle: 'italic',
@@ -28,7 +29,7 @@ const buttonStyle = {
         color: florPrimary[700],
         borderRadius: '5rem',
         padding: '1.5rem 3rem',
-        boxShadow: '5px 5px 5px black',
+        boxShadow: `5px 5px 5px ${florPrimary[900]}`,
         backgroundColor: florPrimary[50],
         transition: 'all .2s'
     },
@@ -38,7 +39,7 @@ const buttonStyle = {
         transform: 'translateY(-5px)'
     },
     '&:active, &:focus': {
-        boxShadow: '5px 7px 5px black',
+        boxShadow: `5px 7px 5px ${florPrimary[900]}`,
         transform: 'translateY(-2px)'
     }
 }

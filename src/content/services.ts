@@ -69,7 +69,7 @@ export const services: Service[] = [
             'Radiofrequency is an aesthetic treatment used to combat sagging of the face and neck, being very effective to eliminate wrinkles, expression lines and even localized fat, being a safe method with lasting effects.',
             'The radiofrequency device raises the temperature of the skin and muscle, promoting collagen contraction and favoring the production of more collagen and elastin fibers, giving more support and firmness to the skin. Results can be seen within the first few days right after the first session and the result is progressive, and therefore, the more sessions you do, the bigger and better the results will be.'],
         prices: [{address: 'Lisboa', price: 35}],
-        duration: 75
+        duration: 60
     },
     {
         id: 'presso',

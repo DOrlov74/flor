@@ -37,3 +37,16 @@ export const moveInBottom = {
             transform: 'translate(0)'
         }
 }
+export const moveOutBottom = {
+    '0%': {
+        opacity: 1,
+        transform: 'translate(0)'
+    },
+    '80%': {
+        transform: 'translateY(-1rem)'
+    },
+    '100%': {
+        opacity: 1,
+        transform: 'translateY(10rem)'
+    }
+}

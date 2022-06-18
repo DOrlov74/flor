@@ -10,6 +10,7 @@ import { buttonStyle, containerStyle } from "../theme/styles";
 import { LangContext } from "../components/LanguageProvider";
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
+import Footer from "../components/Footer";
 
 const mdHeight = {
     height: 'calc(100vh - 128px - 6.5rem - 0.35em)'
@@ -102,6 +103,7 @@ export default function Bookings() {
     };
 
     return(
+        <>
         <Box 
             sx={containerStyle}>
             <Grid container spacing={2}>
@@ -242,5 +244,7 @@ export default function Bookings() {
                 
             </Grid>
         </Box>
+        <Footer/>
+        </>
     );
 }

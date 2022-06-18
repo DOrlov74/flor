@@ -14,6 +14,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { UserContext } from "./UserProvider";
 import { containerStyle, formStyle } from "../theme/styles";
 import { LangContext } from "./LanguageProvider";
+import Footer from "./Footer";
 
 const buttonStyle = {
         '&, &:link, &.visited': {
@@ -80,6 +81,7 @@ export default function LoginForm() {
     };
 
     return(
+        <>
         <Box 
             sx={containerStyle}>
             <Box
@@ -154,5 +156,7 @@ export default function LoginForm() {
                 </Button>
             </Box>
         </Box>
+        <Footer/>
+        </>
     );
 }

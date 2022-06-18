@@ -18,6 +18,7 @@ import { Divider, List, ListItem, ListItemText } from "@mui/material";
 import { containerStyle } from "../theme/styles";
 import { useContext } from "react";
 import { LangContext } from "../components/LanguageProvider";
+import Footer from "../components/Footer";
 
 const images = {
     'therapeutic': therapeutic, 
@@ -59,6 +60,7 @@ export default function ServicePage(){
         }
     } as const;
     return(
+        <>
         <Box
             component="div"
             sx={containerStyle}>
@@ -129,11 +131,13 @@ export default function ServicePage(){
                                 <Divider key={`${p.address}  ${p.price}`} />
                                 </>
                                 ))}
-                            <Button fullWidth sx={buttonStyle} component={Link} to={`/book/${id}`}>Book</Button>    
+                            <Button fullWidth sx={buttonStyle} component={Link} to={`/book/${id}`}>{language?"Marcar":"Book"}</Button>    
                         </Box>
                     </Grid>
                 </Grid>
             </Paper>
         </Box>
+        <Footer/>
+        </>
     );
 }

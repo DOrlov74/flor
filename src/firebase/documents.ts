@@ -1,5 +1,5 @@
 import {db} from './config';
-import { setDoc, doc, getDoc, collection, query, where, getDocs, deleteDoc } from "firebase/firestore";
+import { setDoc, doc, getDoc, collection, query, where, getDocs, deleteDoc, updateDoc } from "firebase/firestore";
 import {User} from 'firebase/auth';
 import { Booking, BookingDoc } from '../models/Booking';
 import { AppMessageContext } from '../models/AppMessage';
@@ -7,6 +7,7 @@ import { Vacancy } from '../models/Vacancy';
 import { format } from 'date-fns';
 import { AppUser } from '../models/User';
 import { sendNotification } from '../telegram/api';
+import { Post, PostDoc } from '../models/Post';
 
 export const createUserDoc= async (user:User, data:any, appMessageCtx: AppMessageContext | null)=>{
     if (!user) return false;
@@ -251,5 +252,63 @@ export const deleteVacancyDoc= async (vacancy:Vacancy, appMessageCtx: AppMessage
         } catch (e) {
             console.error('error deleting vacancy, ', e);
             appMessageCtx?.setMessage({severity: 'error', message: `error deleting vacancy, ${e}`});
+        }
+};
+
+export const createPostDoc= async (post:Post, appMessageCtx: AppMessageContext | null)=>{
+    if (!post || ! post.author) return false;
+    const userRef = doc(db, "users", post.author.id);
+    const snapshot = await getDoc(userRef);
+    if (snapshot.exists()) {
+        const createdAt=new Date();
+        const {displayName, photoURL}=post.author;
+        const {date, title, enTitle, content, enContent, likes} = post;
+        try {
+            await setDoc(doc(db, "news", post.id),{
+                displayName, photoURL, createdAt, date, title, enTitle, content, enContent, likes
+            });
+                console.log("Document written with ID: ", post.id);
+            appMessageCtx?.setMessage({severity: 'success', message: `post by ${displayName} succesfully created`});
+            return true;
+        } catch (e) {
+            console.error('error creating post, ', e);
+            appMessageCtx?.setMessage({severity: 'error', message: `error creating post, ${e}`});
+            return false;
+        }
+    } else {
+        console.error('error creating post, author does not exist');
+        appMessageCtx?.setMessage({severity: 'error', message: `error creating post, author does not exist`});
+        return false;
+    }
+};
+
+export const getPosts= async (appMessageCtx: AppMessageContext | null)=> {
+    try {
+        const newsRef = collection(db, "news");
+        const querySnapshot = await getDocs(newsRef);
+        if (!querySnapshot.empty){
+            const result = [] as any;
+            querySnapshot.forEach(d => {
+                result.push({id: d.id, ...d.data()});
+            })
+            return result as PostDoc[];
+        } else {
+            appMessageCtx?.setMessage({severity: 'error', message: `no posts were found`});
+            return null;
+        }      
+    } catch (error) {
+        console.error ('error fetching posts, ', error);
+        appMessageCtx?.setMessage({severity: 'error', message: `error fetching posts, ${error}`});
+    };
+};
+
+export const updateLikeToPostDoc= async (post:Post)=>{
+    if (!post) return;
+    const {id, likes} = post; 
+        try {
+            await updateDoc(doc(db, "news", id), "likes", likes);
+                console.log("Document updated with ID: ", id);
+        } catch (e) {
+            console.error('error updating post, ', e);
         }
 };

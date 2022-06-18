@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { signup } from "../firebase/auth";
 import { florPrimary, florSecondary } from "../theme/colors";
 import { containerStyle, formStyle } from "../theme/styles";
+import Footer from "./Footer";
 import { LangContext } from "./LanguageProvider";
 import { MessageContext } from "./MessageProvider";
 import { UserContext } from "./UserProvider";
@@ -96,6 +97,7 @@ export default function SigninForm() {
     };
 
     return(
+        <>
         <Box 
             sx={containerStyle}>
             <Box
@@ -186,5 +188,7 @@ export default function SigninForm() {
                 </Button>
             </Box>
         </Box>
+        <Footer/>
+        </>
     );
 }

@@ -2,6 +2,7 @@ import { DatePicker, TimePicker } from "@mui/lab";
 import { Box, Button, Card, CardActions, CardContent, Chip, Grid, Stack, TextField, Typography } from "@mui/material";
 import { addDays, format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
+import Footer from "../components/Footer";
 import { LangContext } from "../components/LanguageProvider";
 import { MessageContext } from "../components/MessageProvider";
 import { UserContext } from "../components/UserProvider";
@@ -81,6 +82,7 @@ export default function Vacancies() {
     };
 
     return(
+        <>
         <Box 
             sx={containerStyle}>
             <Grid container spacing={2}>
@@ -192,5 +194,7 @@ export default function Vacancies() {
                 
             </Grid>
         </Box>
+        <Footer/>
+        </>
     );
 }

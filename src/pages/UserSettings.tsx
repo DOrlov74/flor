@@ -11,6 +11,7 @@ import { MessageContext } from "../components/MessageProvider";
 import { updateUserDoc } from "../firebase/documents";
 import { buttonStyle, containerStyle, formStyle } from "../theme/styles";
 import { LangContext } from "../components/LanguageProvider";
+import Footer from "../components/Footer";
 
 const validationSchema = yup.object({
     username: yup
@@ -142,6 +143,8 @@ export default function UserSettings() {
                     <Button sx={buttonStyle} size="large" type="submit">{language ? 'Guardar' : 'Save'}</Button>
                 </Stack>
             </Box>
-        </Box>}</>
+        </Box>}
+        <Footer/>
+        </>
     );
 }

@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, Container, Grid, Typography } from "@mui/material";
 import { useContext } from "react";
+import Footer from "../components/Footer";
 import { LangContext } from "../components/LanguageProvider";
 //import { containerStyle } from "../theme/styles";
 
@@ -36,6 +37,7 @@ export default function ContactsPage() {
     const {language}=useContext(LangContext);
     
     return(
+        <>
         <Container 
             sx={containerStyle}>
             <Grid container spacing={2} >
@@ -81,5 +83,7 @@ export default function ContactsPage() {
                 </Grid>
             </Grid>
         </Container>
+        <Footer/>
+        </>
     );
 }

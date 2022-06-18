@@ -49,7 +49,6 @@ function App() {
           </Routes>
           </LocalizationProvider>
           <MessageAlert/>
-          <Footer/>
         </Box>
       </BrowserRouter>
     </ThemeProvider>
