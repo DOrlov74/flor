@@ -49,7 +49,7 @@ export default function Home() {
     
     return(
         <>
-            <Stack>
+            <Stack >
                 <Typography variant="h4" sx={promoStyle}>
                     {language ? 'Massagem terapeutica' : 'Therapeutic massage'}
                 </Typography>

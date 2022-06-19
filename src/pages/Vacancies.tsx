@@ -24,7 +24,7 @@ export default function Vacancies() {
     useEffect(() => {
         if (user && user.role === 'admin'){
             getVacancies(appMessageCtx).then(v => {
-            if (v) setVacancies(v);
+            if (v) setVacancies(v.sort((a,b)=>(a.date<b.date?-1:a.date>b.date?1:0)));
         })}
     }, [user]);
 

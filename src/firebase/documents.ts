@@ -7,7 +7,7 @@ import { Vacancy } from '../models/Vacancy';
 import { format } from 'date-fns';
 import { AppUser } from '../models/User';
 import { sendNotification } from '../telegram/api';
-import { Post, PostDoc } from '../models/Post';
+import { Post } from '../models/Post';
 
 export const createUserDoc= async (user:User, data:any, appMessageCtx: AppMessageContext | null)=>{
     if (!user) return false;
@@ -257,15 +257,16 @@ export const deleteVacancyDoc= async (vacancy:Vacancy, appMessageCtx: AppMessage
 
 export const createPostDoc= async (post:Post, appMessageCtx: AppMessageContext | null)=>{
     if (!post || ! post.author) return false;
-    const userRef = doc(db, "users", post.author.id);
+    const userRef = doc(db, "users", post.author.uid);
     const snapshot = await getDoc(userRef);
     if (snapshot.exists()) {
         const createdAt=new Date();
-        const {displayName, photoURL}=post.author;
+        const {uid, displayName, photoURL}=post.author;
+        const author = {uid, displayName, photoURL};
         const {date, title, enTitle, content, enContent, likes} = post;
         try {
             await setDoc(doc(db, "news", post.id),{
-                displayName, photoURL, createdAt, date, title, enTitle, content, enContent, likes
+                author, createdAt, date, title, enTitle, content, enContent, likes
             });
                 console.log("Document written with ID: ", post.id);
             appMessageCtx?.setMessage({severity: 'success', message: `post by ${displayName} succesfully created`});
@@ -291,7 +292,7 @@ export const getPosts= async (appMessageCtx: AppMessageContext | null)=> {
             querySnapshot.forEach(d => {
                 result.push({id: d.id, ...d.data()});
             })
-            return result as PostDoc[];
+            return result as Post[];
         } else {
             appMessageCtx?.setMessage({severity: 'error', message: `no posts were found`});
             return null;
@@ -310,5 +311,17 @@ export const updateLikeToPostDoc= async (post:Post)=>{
                 console.log("Document updated with ID: ", id);
         } catch (e) {
             console.error('error updating post, ', e);
+        }
+};
+
+export const deletePostDoc= async (post:Post, appMessageCtx: AppMessageContext | null)=>{
+    if (!post) return;
+        try {
+            await deleteDoc(doc(db, "news", post.id));
+                console.log("Document deleted with ID: ", post.id);
+            appMessageCtx?.setMessage({severity: 'success', message: `post by ${post.author.displayName} succesfully deleted`});
+        } catch (e) {
+            console.error('error deleting post, ', e);
+            appMessageCtx?.setMessage({severity: 'error', message: `error deleting post, ${e}`});
         }
 };

@@ -38,7 +38,7 @@ export default function Footer({pos}: Props) {
     };
 
     return(
-        <AppBar position={pos!=undefined && pos<64 ? "fixed" : "static"} sx={checked? slideOutStyle : footerStyle }>
+        <AppBar position={pos!=undefined && pos<64 ? "fixed" : "static"} sx={checked? slideOutStyle : footerStyle } >
             <Container maxWidth="xl">
                 <Toolbar sx={{display: 'flex', flexDirection: {xs: 'column', md: 'row'} , justifyContent: 'space-around'}}>
                         <Typography variant={'body2'}>

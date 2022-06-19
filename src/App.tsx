@@ -11,7 +11,6 @@ import SigninForm from './components/SigninForm';
 import MessageAlert from './components/MessageAlert';
 import Services from './pages/Services';
 import ServicePage from './pages/ServicePage';
-import Footer from './components/Footer';
 import Book from './pages/Book';
 import Bookings from './pages/Bookings';
 import Vacancies from './pages/Vacancies';
@@ -21,6 +20,7 @@ import ResetPassForm from './components/ResetPassForm';
 import UserSettings from './pages/UserSettings';
 import ContactsPage from './pages/ContactsPage';
 import Privacy from './pages/Privacy';
+import News from './pages/News';
 
 function App() {
   return (
@@ -43,6 +43,7 @@ function App() {
             <Route path="/reset" element={<ResetPassForm/>}/>
             <Route path="/bookings" element={<Bookings/>}/>
             <Route path="/vacancies" element={<Vacancies/>}/>
+            <Route path="/news" element={<News/>}/>
             <Route path="/settings" element={<UserSettings/>}/>
             <Route path="/contacts" element={<ContactsPage/>}/>
             <Route path="/privacy" element={<Privacy/>}/>

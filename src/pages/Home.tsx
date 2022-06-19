@@ -1,11 +1,16 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import image from "../assets/background3.jpg";
 import iphone from "../assets/iphone_opt.jpg";
 import Footer from "../components/Footer";
+import { MessageContext } from "../components/MessageProvider";
 import NewsCard from "../components/NewsCard";
+import NewsCarousel from "../components/NewsCarousel";
 import Promo from "../components/Promo";
+import { UserContext } from "../components/UserProvider";
 import { news } from "../content/news";
+import { getPosts } from "../firebase/documents";
+import { Post } from "../models/Post";
 
 const containerStyle = {
     background: `url(${image})`,
@@ -37,12 +42,18 @@ const newsContainerStyle = {
 } as const;
 
 export default function Home() {
+    const appMessageCtx=useContext(MessageContext);
+    const [newsList, setNewsList] = useState<Post[]>([]);
     const [scrollPosition, setScrollPosition] = useState(0);
     const handleScroll = () => {
         const position = window.pageYOffset;
         setScrollPosition(position);
     };
-
+    useEffect(()=>{
+        getPosts(appMessageCtx).then(n => {
+            if (n) setNewsList(n.sort((a,b)=>(a.date<b.date?-1:a.date>b.date?1:0)));
+        })
+    },[])
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
 
@@ -51,21 +62,27 @@ export default function Home() {
         };
     }, []);
 
+    const newsRef = useRef<null | HTMLDivElement>(null)
+    const scrollToNews = () => {
+        if (newsRef && newsRef.current) newsRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    }
+
     return(
         <>
         <Box 
             component="div"
             sx={containerStyle}>
             <Promo/>
+            <NewsCarousel clickHandler={scrollToNews}/>
         </Box>
         <Box
             component="div"
             sx={newsContainerStyle}>
-            {news.sort((a,b)=>(a.date<b.date?1:a.date>b.date?-1:0)).map(post => (
-                <NewsCard key= {post.id} post={post}/>
+            {newsList.map(post => (
+                <NewsCard key= {post.id} post={post} newsRef={newsRef}/>
             ))}
         </Box>
-        <Footer pos={scrollPosition}/>
+        <Footer pos={scrollPosition} />
         </>
     )
 }

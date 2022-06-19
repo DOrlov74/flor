@@ -79,6 +79,12 @@ export default function Header(){
                 case 'bookings':
                     navigate('/bookings');
                     break;
+                case 'vacancies':
+                    navigate('/vacancies');
+                    break;
+                case 'news':
+                    navigate('/news');
+                    break;
             }
         }
     };
@@ -234,6 +240,16 @@ export default function Header(){
                             <Typography textAlign="center">{language ? 'Vagas' : 'Vacancies'}</Typography>
                         </MenuItem> 
                         }
+                        {(user?.role === 'admin') && <MenuItem 
+                            component={Button}
+                            onClick={handleCloseUserMenu} 
+                            name='news'
+                            sx={{textTransform: 'none'}}
+                            disableRipple={true}
+                            >
+                            <Typography textAlign="center">{language ? 'Noticias' : 'News'}</Typography>
+                        </MenuItem> 
+                        }
                         {user?
                         <MenuItem 
                             component={Button}
@@ -296,6 +312,13 @@ export default function Header(){
                                 onClick={handleUserItemSelect}
                                 component={Link} to='/vacancies'>
                                     {language ? 'Vagas' : 'Vacancies'}
+                            </Button>}
+                            {user.role === 'admin' && 
+                            <Button 
+                                sx={{ color: 'white', display: 'block', textTransform: 'none' }}
+                                onClick={handleUserItemSelect}
+                                component={Link} to='/news'>
+                                    {language ? 'Noticias' : 'News'}
                             </Button>}
                             </>:
                             <><Button 

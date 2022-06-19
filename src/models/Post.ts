@@ -1,6 +1,6 @@
 export interface PostAuthor {
-    id: string;
-    displayName: string;
+    uid: string;
+    displayName: string | null;
     photoURL: string | null;
 }
 
