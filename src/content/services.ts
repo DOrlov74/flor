@@ -15,8 +15,8 @@ export const services: Service[] = [
     },
     {
         id: 'ultrasonic',
-        name: 'Tratamento terapêutico: massagem + ultrassons',
-        enName: 'Therapeutic treatment: massage + ultrasound',
+        name: 'Tratamento da dor ( quick massagem) 20 min/ uma zona + ultrassom',
+        enName: 'Pain treatment (quick massage) 20 min/ one zone + ultrasound',
         img: '../assets/ultra_opt.jpg',
         content: ['é uma massagem profunda, que promove o alivio de tensões que comprometem o bem-estar do corpo. Esta massagem tem por finalidade reduce muscle or joint tension and lessen pain.'],
         enContent: ['it\'s a deep massage, that promotes stress relief and the well-being of the body. This massage aims to reduce muscle tension ou articular e deminuir a dor.'],
@@ -26,8 +26,8 @@ export const services: Service[] = [
         enList: ['Applying heat to lessen pain, adhesions between tissues, muscle spasms helps the massage not to be aggressive. ( 10 min)',
             'Massage phase that unblocks the energy flow of muscles, organs, nerves, blood vessels, or entire regions compromised by contractures, returning to the organism the energy supply it needs for its perfect functioning. (45 min)',
             'Ultrasound will stimulate muscles and joints through vibrations. It will help find and relax the contracted muscle fibers and drain waste (inflammation) deposits. (7 min)'],
-        prices: [{address: 'Lisboa', price: 35}, {address: 'Alfragide', price: 45}],
-        duration: 60
+        prices: [{address: 'Lisboa', price: 20}],
+        duration: 30
     },
     {
         id: 'paraffin',

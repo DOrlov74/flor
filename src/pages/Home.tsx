@@ -3,12 +3,11 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import image from "../assets/background3.jpg";
 import iphone from "../assets/iphone_opt.jpg";
 import Footer from "../components/Footer";
+import InstaLink from "../components/InstaLink";
 import { MessageContext } from "../components/MessageProvider";
 import NewsCard from "../components/NewsCard";
 import NewsCarousel from "../components/NewsCarousel";
 import Promo from "../components/Promo";
-import { UserContext } from "../components/UserProvider";
-import { news } from "../content/news";
 import { getPosts } from "../firebase/documents";
 import { Post } from "../models/Post";
 
@@ -82,6 +81,7 @@ export default function Home() {
                 <NewsCard key= {post.id} post={post} newsRef={newsRef}/>
             ))}
         </Box>
+        <InstaLink pos={scrollPosition}/>
         <Footer pos={scrollPosition} />
         </>
     )

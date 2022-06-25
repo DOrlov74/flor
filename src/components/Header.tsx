@@ -16,7 +16,7 @@ import { LangContext } from "./LanguageProvider";
 
 const pages:MItem[] = [
     {PName:'Início', EName:'Home', LinkTo:'/'}, 
-    {PName:'Serviços', EName:'Services', LinkTo:'/services'}, 
+    {PName:'Serviços e Preços', EName:'Services and Prices', LinkTo:'/services'}, 
     {PName:'Marcar', EName:'Book', LinkTo:'/book'}, 
     {PName:'Contactos', EName:'Contacts', LinkTo:'/contacts'}];
 
