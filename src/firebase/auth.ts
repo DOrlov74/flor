@@ -9,7 +9,7 @@ export const signup = async (name:string, phone:string, email:string, password:s
         const {user}= await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(user,{displayName: name});
         //console.log("succesfully created", user);
-        createUserDoc(user, {displayName: name, phone: phone}, appMessageCtx);
+        await createUserDoc(user, {displayName: name, phone: phone}, appMessageCtx);
         appMessageCtx?.setMessage({severity: 'success', message: `user ${name} succesfully created`});
         return true;
     } catch (err:unknown) {

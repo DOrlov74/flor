@@ -65,7 +65,7 @@ export default function Book() {
 
     useEffect(()=>{
         if (isMounted && !user) {
-            id ? navigate(`/signin/${id}`) : navigate("/signin");
+            id ? navigate(`/signinandbook/${id}`) : navigate("/signinandbook");
         }
     }, [isMounted, user])
 

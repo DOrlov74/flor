@@ -21,3 +21,4 @@ export interface BookingDoc {
     hour: string;
     status: string;
 }
+

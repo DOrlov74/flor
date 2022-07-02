@@ -65,7 +65,7 @@ export default function NewsCarousel({clickHandler}: Props){
             <IconButton aria-label="left" onClick={moveLeft} sx={buttonStyle}>
                 <ArrowBackIosIcon sx={{mx: '1rem'}}/>
             </IconButton>
-            <Card sx={{backgroundColor: 'transparent', color: 'white'}}>
+            <Card sx={{backgroundColor: 'rgba(0,0,0, 0.3)', color: 'white'}}>
                 <CardHeader title={post?.title} sx={{pb: '0', fontStyle: 'italic'}}></CardHeader>
                 <CardActions>
                     <Button sx={buttonStyle} onClick={clickHandler} >{language ? 'Saber mais...' : 'Learn more...'}</Button>

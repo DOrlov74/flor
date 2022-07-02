@@ -11,6 +11,7 @@ export const containerStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column'
 } as const;
 
 export const buttonStyle = {
@@ -27,7 +28,7 @@ export const buttonStyle = {
 } as const;
 
 export const formStyle = {
-    maxWidth: "sm",
+    maxWidth: {xs: '350px', md: 'sm'},
     margin: '0 auto',
     padding: '1rem',
     display: 'flex',
@@ -42,7 +43,7 @@ export const formStyle = {
 } as const;
 
 export const cardStyle = {
-    width: {sx: '350px', md: '600px'},
+    width: {xs: '350px', md: '600px'},
     margin: '1rem',
     padding: '1rem',
     borderRadius: '10px',

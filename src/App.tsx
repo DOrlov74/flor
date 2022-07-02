@@ -21,6 +21,7 @@ import UserSettings from './pages/UserSettings';
 import ContactsPage from './pages/ContactsPage';
 import Privacy from './pages/Privacy';
 import News from './pages/News';
+import SigninAndBookForm from './components/SigninAndBookForm';
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
             <Route path="/settings" element={<UserSettings/>}/>
             <Route path="/contacts" element={<ContactsPage/>}/>
             <Route path="/privacy" element={<Privacy/>}/>
+            <Route path="/signinandbook" element={<SigninAndBookForm/>}/>
+            <Route path="/signinandbook/:id" element={<SigninAndBookForm/>}/>
           </Routes>
           </LocalizationProvider>
           <MessageAlert/>
