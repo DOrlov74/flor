@@ -7,6 +7,7 @@ import InstaLink from "../components/InstaLink";
 import { MessageContext } from "../components/MessageProvider";
 import NewsCard from "../components/NewsCard";
 import NewsCarousel from "../components/NewsCarousel";
+import NewsLink from "../components/NewsLink";
 import Promo from "../components/Promo";
 import { getPosts } from "../firebase/documents";
 import { Post } from "../models/Post";
@@ -72,7 +73,8 @@ export default function Home() {
             component="div"
             sx={containerStyle}>
             <Promo/>
-            <NewsCarousel clickHandler={scrollToNews}/>
+            {/* <NewsCarousel clickHandler={scrollToNews}/> */}
+            <NewsLink clickHandler={scrollToNews}/>
         </Box>
         <Box
             component="div"
@@ -80,8 +82,10 @@ export default function Home() {
             {newsList.map(post => (
                 <NewsCard key= {post.id} post={post} newsRef={newsRef}/>
             ))}
+            
         </Box>
         <InstaLink pos={scrollPosition}/>
+        
         <Footer pos={scrollPosition} />
         </>
     )
