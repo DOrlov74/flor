@@ -61,7 +61,7 @@ export default function AppCard({service}: Props){
         <Divider />
             {prices.map((p) => (
             <>
-            <Stack key={p.address} direction="row" spacing={5}>
+            <Stack key={`${p.address} & ${p.price}`} direction="row" spacing={5}>
               <Typography variant="body1" color={florSecondary[900]}>
                 {p.address} 
               </Typography>

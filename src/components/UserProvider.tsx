@@ -41,22 +41,6 @@ export default function UserProvider({children}:Props){
        }
     }, [updated, setUpdated]);
 
-    useEffect(() => {
-        if (user){
-            const unsub = onSnapshot(doc(db, "users", user.uid), (doc) => {
-                if (doc) {
-                    getUserDoc(user.uid, appMessageCtx)
-                    .then(u => u ? setUser(u) : setUser(null));     
-                } else {
-                    setUser(null);
-                }
-            });
-            return () => {
-                unsub();
-            }
-        }
-    }, [user])
-
     return (
         <UserContext.Provider value={{user, updated, setUpdated}}>
             {children}
