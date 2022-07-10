@@ -5,6 +5,7 @@ import { Post } from "../models/Post";
 import { LangContext } from "./LanguageProvider";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { parse } from "date-fns";
 
 interface Props {
     clickHandler: MouseEventHandler<HTMLButtonElement>;
@@ -30,7 +31,13 @@ export default function NewsCarousel({clickHandler}: Props){
     const [post, setPost] = useState<Post | undefined>();
     const [n, setN] = useState<number>(0);
     useEffect(()=>{
-        setNewsList(news.sort((a,b)=>(a.date<b.date?1:a.date>b.date?-1:0)));
+        setNewsList(news.sort((a,b)=>{
+            const ad = parse(a.date, 'dd/MM/yyyy', new Date());
+            const bd = parse(b.date, 'dd/MM/yyyy', new Date());
+            if (ad < bd) return 1;
+            else if (ad > bd) return -1;
+            else return 0;
+        }));
     }, [news])
     useEffect(()=>{
         if (newsList) setPost(newsList[0]);

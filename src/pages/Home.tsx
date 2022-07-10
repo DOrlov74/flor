@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { parse } from "date-fns";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import image from "../assets/background3.jpg";
 import iphone from "../assets/iphone_opt.jpg";
@@ -51,7 +52,13 @@ export default function Home() {
     };
     useEffect(()=>{
         getPosts(appMessageCtx).then(n => {
-            if (n) setNewsList(n.sort((a,b)=>(a.date<b.date?-1:a.date>b.date?1:0)));
+            if (n) setNewsList(n.sort((a,b)=>{
+                const ad = parse(a.date, 'dd/MM/yyyy', new Date());
+                const bd = parse(b.date, 'dd/MM/yyyy', new Date());
+                if (ad < bd) return 1;
+                else if (ad > bd) return -1;
+                else return 0;
+            }));
         })
     },[])
     useEffect(() => {

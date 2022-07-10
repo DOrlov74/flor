@@ -36,11 +36,11 @@ export default function NewsCard({post, newsRef}: Props){
     }
   
     return (
-      <Card sx={cardStyle} ref={newsRef}>
+      <Card key={`id${id}`} sx={cardStyle} ref={newsRef}>
         <CardHeader
             avatar={
                 <Avatar alt={author.displayName ? author.displayName : "unknown"} 
-                src={author.photoURL ? author.photoURL : author.uid === 'ae45R0bTxxS5DCDaOSs66I2ZbU63' ? avatar2 : avatar} />
+                src={author.photoURL ? author.photoURL : author.uid === 'ct7MTj8FG9WmeV8fmPNtFFtn1Pz1' ? avatar2 : avatar} />
             }
             title={language? title : enTitle}
             subheader={`${date} ${language ? 'por' : 'by'} ${author.displayName}`}

@@ -1,4 +1,5 @@
 import { DatePicker, TimePicker } from "@mui/lab";
+import { parse } from "date-fns";
 import { Box, Button, Card, CardActions, CardContent, Chip, Grid, Stack, TextField, Typography } from "@mui/material";
 import { addDays, format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
@@ -24,7 +25,13 @@ export default function Vacancies() {
     useEffect(() => {
         if (user && user.role === 'admin'){
             getVacancies(appMessageCtx).then(v => {
-            if (v) setVacancies(v.sort((a,b)=>(a.date<b.date?-1:a.date>b.date?1:0)));
+            if (v) setVacancies(v.sort((a,b)=>{
+                const ad = parse(a.date, 'dd/MM/yyyy', new Date());
+                const bd = parse(b.date, 'dd/MM/yyyy', new Date());
+                if (ad < bd) return 1;
+                else if (ad > bd) return -1;
+                else return 0;
+            }));
         })}
     }, [user]);
 

@@ -30,7 +30,7 @@ export default function Footer({pos}: Props) {
     const [checked, setChecked] = useState(false);
 
     useEffect(()=>{
-        pos!=undefined && pos > 0 && pos < 64 ? setChecked(true) : setChecked(false);
+        pos!==undefined && pos > 0 && pos < 64 ? setChecked(true) : setChecked(false);
     }, [pos])
 
     const handleClose = () => {
@@ -38,7 +38,7 @@ export default function Footer({pos}: Props) {
     };
 
     return(
-        <AppBar position={pos!=undefined && pos<64 ? "fixed" : "static"} sx={checked? slideOutStyle : footerStyle } >
+        <AppBar position={pos!==undefined && pos<64 ? "fixed" : "static"} sx={checked? slideOutStyle : footerStyle } >
             <Container maxWidth="xl">
                 <Toolbar sx={{display: 'flex', flexDirection: {xs: 'column', md: 'row'} , justifyContent: 'space-around'}}>
                         <Typography variant={'body2'}>
