@@ -24,6 +24,7 @@ export default function NewsCard({post, newsRef}: Props){
     const {language}=useContext(LangContext);
     const [curPost, setPost] = useState(post);
     const {id, date, author, title, enTitle, content, enContent, likes}= post;
+    let count=0;
 
     const addLike=()=>{
         const newlikes = ++curPost.likes;
@@ -48,11 +49,11 @@ export default function NewsCard({post, newsRef}: Props){
         />
         <CardContent>
             {language ? content.map(c => (
-                <Typography variant="body1">
+                <Typography key={++count} variant="body1">
                     {c}
                 </Typography>
             )): enContent.map(c => (
-                <Typography variant="body1">
+                <Typography key={++count} variant="body1">
                     {c}
                 </Typography>
             ))}

@@ -6,7 +6,7 @@ import logo from "../assets/logo.svg";
 import portuguese from "../assets/portugal.svg";
 import english from "../assets/united-kingdom.svg";
 import { MItem } from "../models/Links";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginDialog from "./LoginDialog";
 import { UserContext } from "./UserProvider";
 import { logout } from "../firebase/auth";
@@ -27,10 +27,11 @@ export default function Header(){
     const userCtx=useContext(UserContext);
     const user = userCtx?.user;
     let navigate = useNavigate();
+    const location = useLocation();
     
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [value, setValue] = useState<string | boolean>(pages[0].EName);
+    const [value, setValue] = useState<string | boolean>(location.pathname);
 
     const [signin, setSignin] = useState(false);
     const [login, setLogin] = useState(false);
@@ -142,7 +143,7 @@ export default function Header(){
                         }}
                         >
                         {pages.map((page) => (
-                            <MenuItem key={page.EName} id={page.EName} onClick={handleCloseNavMenu} component={Link} to={page.LinkTo}>
+                            <MenuItem key={page.EName} id={page.LinkTo} onClick={handleCloseNavMenu} component={Link} to={page.LinkTo}>
                                 <Typography textAlign="center">{language ? page.PName : page.EName}</Typography>
                             </MenuItem>
                         ))}
@@ -167,7 +168,7 @@ export default function Header(){
                         {pages.map((page) => (
                         <Tab
                             key={page.EName}
-                            value={page.EName}
+                            value={page.LinkTo}
                             label={language ? page.PName : page.EName}
                             component={Link} to={page.LinkTo}
                             sx={{ color: 'white', display: 'block' }}

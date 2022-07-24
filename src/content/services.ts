@@ -1,4 +1,19 @@
 import { Service } from "../models/Service";
+import therapeutic from '../assets/back_opt.jpg';
+import ultrasonic from '../assets/ultra_opt.jpg';
+import paraffin from '../assets/parafina_opt.jpg';
+import facial from '../assets/facial_opt.jpg';
+import radio from '../assets/radio_opt.jpg';
+import presso from '../assets/presso_opt.jpg';
+
+export const images = {
+    'therapeutic': therapeutic, 
+    'ultrasonic': ultrasonic,
+    'paraffin': paraffin,
+    'facial': facial,
+    'radio': radio,
+    'presso': presso
+};
 
 export const services: Service[] = [
     {

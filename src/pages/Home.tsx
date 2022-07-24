@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { parse } from "date-fns";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import image from "../assets/background3.jpg";
 import iphone from "../assets/iphone_opt.jpg";
+import Feedback from "../components/Feedback";
 import Footer from "../components/Footer";
 import InstaLink from "../components/InstaLink";
 import { MessageContext } from "../components/MessageProvider";
@@ -10,11 +11,13 @@ import NewsCard from "../components/NewsCard";
 import NewsCarousel from "../components/NewsCarousel";
 import NewsLink from "../components/NewsLink";
 import Promo from "../components/Promo";
+import ServicesCorousel from "../components/ServicesCarousel";
 import { getPosts } from "../firebase/documents";
 import { Post } from "../models/Post";
 
 const containerStyle = {
-    background: `url(${image})`,
+    background: `radial-gradient(95.67% 157.73% at 22.81% 4.33%, #AB9475 27.46%, rgba(255, 255, 255, 0) 56.94%), url(${image})`,
+    //background: 'linear-gradient(126.64deg, #AB9475 25.88%, rgba(255, 255, 255, 0) 48.84%)',
     backgroundSize: 'cover',
     position: 'relative',
     width: '100%',
@@ -22,8 +25,8 @@ const containerStyle = {
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    alignItems: 'left',
+    justifyContent: 'space-between',
     color: 'white',
     
 } as const;
@@ -58,7 +61,7 @@ export default function Home() {
                 if (ad < bd) return 1;
                 else if (ad > bd) return -1;
                 else return 0;
-            }));
+            }).slice(0, 2));
         })
     },[])
     useEffect(() => {
@@ -81,6 +84,14 @@ export default function Home() {
             sx={containerStyle}>
             <Promo/>
             {/* <NewsCarousel clickHandler={scrollToNews}/> */}
+            <Grid container spacing={2}  sx={{backgroundColor: 'rgba(0,0,0, 0.2)'}}>
+                <Grid item xs={12} md={7} sx={{alignItems: 'center'}}>
+                    <ServicesCorousel/>
+                </Grid>
+                <Grid item xs={12} md={5}>
+                    <Feedback/>
+                </Grid>
+            </Grid>
             <NewsLink clickHandler={scrollToNews}/>
         </Box>
         <Box

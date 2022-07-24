@@ -5,31 +5,17 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Service } from "../models/Service";
-import therapeutic from '../assets/back_opt.jpg';
-import ultrasonic from '../assets/ultra_opt.jpg';
-import paraffin from '../assets/parafina_opt.jpg';
-import facial from '../assets/facial_opt.jpg';
-import radio from '../assets/radio_opt.jpg';
-import presso from '../assets/presso_opt.jpg';
 import { florSecondary } from "../theme/colors";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 import { Divider } from "@mui/material";
 import { useContext } from "react";
 import { LangContext } from "./LanguageProvider";
+import { images } from "../content/services";
 
 interface Props {
     service: Service;
 }
-
-const images = {
-    'therapeutic': therapeutic, 
-    'ultrasonic': ultrasonic,
-    'paraffin': paraffin,
-    'facial': facial,
-    'radio': radio,
-    'presso': presso
-};
 
 export default function AppCard({service}: Props){
   const {language}=useContext(LangContext);
@@ -44,7 +30,7 @@ export default function AppCard({service}: Props){
             return false;
         }});
     return (
-    <Card sx={{ width: 350 }}>
+    <Card key={id} sx={{ width: 350 }}>
       <CardMedia
         component="img"
         height="150"

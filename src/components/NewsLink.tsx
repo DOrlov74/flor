@@ -10,7 +10,7 @@ interface Props {
 const iconStyle = {
     position: 'fixed',
     top: '84px',
-    left: {xs:'10px', md:'30px'},
+    right: {xs:'10px', md:'30px'},
     width: {xs:'100px', md:'200px'},
     borderRadius: '10px',
     paddingBottom: '0.8rem',

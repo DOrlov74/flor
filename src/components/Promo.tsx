@@ -9,10 +9,21 @@ import { LangContext } from "./LanguageProvider"
 import "@fontsource/comfortaa";
 
 const promoStyle = {
-    textAlign: 'center',
-    m: '1rem',
+    fontSize: {xs:'1.2rem', md:'2rem'},
+    textAlign: 'left',
     fontFamily: 'Comfortaa',
     fontWeight: 700,
+    fontStyle: 'italic',
+    animation: 'moveInLeft 2s ease-out',
+    animationFillMode: 'both',
+    '@keyframes moveInLeft': {...moveInLeft}
+}
+
+const commentStyle = {
+    fontSize: {xs:'0.8rem', md:'1rem'},
+    textAlign: 'left',
+    fontFamily: 'Comfortaa',
+    fontWeight: 500,
     fontStyle: 'italic',
     animation: 'moveInLeft 2s ease-out',
     animationFillMode: 'both',
@@ -25,10 +36,11 @@ const buttonStyle = {
         fontWeight: 700,
         fontStyle: 'italic',
         fontSize: '1.2rem',
-        margin: '1rem auto',
+        maxWidth: '15rem',
+        margin: {xs:'1rem', md:'2rem'},
         color: florPrimary[700],
-        borderRadius: '5rem',
-        padding: '1.5rem 3rem',
+        borderRadius: '2rem',
+        padding: '1rem 2rem',
         boxShadow: `5px 5px 5px ${florPrimary[900]}`,
         backgroundColor: florPrimary[50],
         transition: 'all .2s'
@@ -49,20 +61,21 @@ export default function Home() {
     
     return(
         <>
-            <Stack >
+            <Stack alignItems="flex-start" sx={{m: {xs:'1rem', md:'2rem'}}}>
                 <Typography variant="h4" sx={promoStyle}>
                     {language ? 'Massagem terapeutica' : 'Therapeutic massage'}
                 </Typography>
                 <Typography variant="h4" sx={promoStyle}>
                     {language ? 'em Lisboa e Alfragide' : 'in Lisbon and Alfragide'}
                 </Typography>
-                <Typography variant="h6" sx={promoStyle}>
+                <Typography variant="h6" sx={commentStyle}>
                     {language ? 'só por marcação' : 'by appointment'}
                 </Typography>
-            </Stack>
+            
             <Button color="secondary" size="large" disableRipple sx={buttonStyle} component={Link} to="/book">
                 {language ? 'Marcar agora' : 'Book now'}
             </Button>
+            </Stack>
         </>
     )
 }
