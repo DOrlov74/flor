@@ -25,7 +25,7 @@ export default function Feedback(){
     const {language}=useContext(LangContext);
     
     return(
-        <Stack alignItems="flex-start" sx={{m: {xs:'1rem', md:'2rem'}}}>
+        <Stack alignItems="flex-start" sx={{minWidth:100, m: {xs:'1rem', md:'2rem'}}}>
             <Typography variant="h6" sx={{mb: '1rem'}}>
                     {language ? 'Os clientes disem...' : 'Customers say...'}
             </Typography>

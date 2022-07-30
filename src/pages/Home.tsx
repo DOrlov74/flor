@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import { parse } from "date-fns";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import image from "../assets/background3.jpg";
@@ -84,14 +84,12 @@ export default function Home() {
             sx={containerStyle}>
             <Promo/>
             {/* <NewsCarousel clickHandler={scrollToNews}/> */}
-            <Grid container spacing={2}  sx={{backgroundColor: 'rgba(0,0,0, 0.2)'}}>
-                <Grid item xs={12} md={7} sx={{alignItems: 'center'}}>
+            <Stack direction={{xs:'column', md:'row'}} spacing={5}  sx={{backgroundColor: 'rgba(0,0,0, 0.2)'}}>
+                <Box sx={{margin: {xs:'0 0.5rem', md:'0 2rem'}, alignItems: 'center'}}>
                     <ServicesCorousel/>
-                </Grid>
-                <Grid item xs={12} md={5}>
+                </Box>
                     <Feedback/>
-                </Grid>
-            </Grid>
+            </Stack>
             <NewsLink clickHandler={scrollToNews}/>
         </Box>
         <Box

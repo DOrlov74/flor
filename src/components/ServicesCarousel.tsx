@@ -73,7 +73,7 @@ export default function ServicesCorousel(){
                             return false;
                         }});
                     return (
-                        <div key={step.name}>
+                        <div key={step.name} >
                             {Math.abs(activeStep - index) <= 2 ? (
                             <Box
                                 component="img"

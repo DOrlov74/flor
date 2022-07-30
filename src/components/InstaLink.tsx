@@ -9,7 +9,7 @@ interface Props {
 const iconStyle = {
     position: 'fixed',
     bottom: {xs:'52px', md:'84px'},
-    left: '30px',
+    right: '30px',
     zIndex: '1200',
     '&, &:link, &.visited': {
         color: 'white',
