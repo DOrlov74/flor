@@ -14,6 +14,7 @@ import Promo from "../components/Promo";
 import ServicesCorousel from "../components/ServicesCarousel";
 import { getPosts } from "../firebase/documents";
 import { Post } from "../models/Post";
+import Faqs from "./Faqs";
 
 const containerStyle = {
     background: `radial-gradient(95.67% 157.73% at 22.81% 4.33%, #AB9475 27.46%, rgba(255, 255, 255, 0) 56.94%), url(${image})`,
@@ -84,7 +85,8 @@ export default function Home() {
             sx={containerStyle}>
             <Promo/>
             {/* <NewsCarousel clickHandler={scrollToNews}/> */}
-            <Stack direction={{xs:'column', md:'row'}} spacing={5}  sx={{backgroundColor: 'rgba(0,0,0, 0.2)'}}>
+            <Stack direction={{xs:'column', md:'row'}} spacing={5}  
+                sx={{backgroundColor: 'rgba(0,0,0, 0.2)'}}>
                 <Box sx={{margin: {xs:'0 0.5rem', md:'0 2rem'}, alignItems: 'center'}}>
                     <ServicesCorousel/>
                 </Box>
@@ -92,13 +94,18 @@ export default function Home() {
             </Stack>
             <NewsLink clickHandler={scrollToNews}/>
         </Box>
+        <Faqs/>
         <Box
             component="div"
             sx={newsContainerStyle}>
-            {newsList.map(post => (
-                <NewsCard key= {post.id} post={post} newsRef={newsRef}/>
-            ))}
-            
+            <Grid container spacing={2} sx={{maxWidth: 'xl'}}>
+                <Grid item xs={12} md={4} ></Grid>
+                <Grid item xs={12} md={8} >
+                    {newsList.map(post => (
+                        <NewsCard key= {post.id} post={post} newsRef={newsRef}/>
+                    ))}
+                </Grid>
+            </Grid>
         </Box>
         <InstaLink pos={scrollPosition}/>
         

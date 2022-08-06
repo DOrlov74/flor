@@ -49,3 +49,20 @@ export const cardStyle = {
     borderRadius: '10px',
     boxShadow: `5px 5px 5px ${florPrimary[900]}`,
 } as const;
+
+export const quoteStyle = {
+    fontSize: {xs:'1rem', md:'1.2rem'},
+    lineHeight: '1.2rem',
+    textAlign: 'left',
+    fontFamily: 'kaushan-script',
+    fontWeight: 500,
+    fontStyle: 'italic',
+} as const;
+
+export const nameStyle = {
+    fontSize: {xs:'0.6rem', md:'0.8rem'},
+    textAlign: 'right',
+    fontWeight: 500,
+    fontStyle: 'italic',
+    ml: 'auto',
+}as const;

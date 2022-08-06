@@ -4,18 +4,26 @@ import { Post } from "../models/Post";
 import { LangContext } from "./LanguageProvider";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from "react-router-dom";
-import { cardStyle } from "../theme/styles";
 import avatar from "../assets/avatar.png";
 import avatar2 from "../assets/avatar2.png";
 import { deletePostDoc, updateLikeToPostDoc } from "../firebase/documents";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { UserContext } from "./UserProvider";
 import { MessageContext } from "./MessageProvider";
+import { florPrimary } from "../theme/colors";
 
 interface Props {
     post: Post;
     newsRef?: any;
 }
+
+const newsCardStyle = {
+    width: {xs: '350px', md: '600px'},
+    margin: '1rem auto',
+    padding: '1rem',
+    borderRadius: '10px',
+    boxShadow: `5px 5px 5px ${florPrimary[900]}`,
+} as const;
 
 export default function NewsCard({post, newsRef}: Props){
     const appMessageCtx=useContext(MessageContext);
@@ -37,7 +45,7 @@ export default function NewsCard({post, newsRef}: Props){
     }
   
     return (
-      <Card key={`id${id}`} sx={cardStyle} ref={newsRef}>
+      <Card key={`id${id}`} sx={newsCardStyle} ref={newsRef}>
         <CardHeader
             avatar={
                 <Avatar alt={author.displayName ? author.displayName : "unknown"} 
