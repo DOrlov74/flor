@@ -1,11 +1,10 @@
 import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Stack, Tab, Tabs, Toolbar, Tooltip, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from '@mui/icons-material/Settings';
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../assets/logo.svg";
 import portuguese from "../assets/portugal.svg";
 import english from "../assets/united-kingdom.svg";
-import { MItem } from "../models/Links";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginDialog from "./LoginDialog";
 import { UserContext } from "./UserProvider";
@@ -13,12 +12,8 @@ import { logout } from "../firebase/auth";
 import { MessageContext } from "./MessageProvider";
 import SigninDialog from "./SigninDialog";
 import { LangContext } from "./LanguageProvider";
-
-const pages:MItem[] = [
-    {PName:'Início', EName:'Home', LinkTo:'/'}, 
-    {PName:'Serviços e Preços', EName:'Services and Prices', LinkTo:'/services'}, 
-    {PName:'Marcar', EName:'Book', LinkTo:'/book'}, 
-    {PName:'Contactos', EName:'Contacts', LinkTo:'/contacts'}];
+import { pages } from "../content/pages";
+import { PageContext } from "./PageProvider";
 
 export default function Header(){
     const langCtx=useContext(LangContext);
@@ -26,12 +21,30 @@ export default function Header(){
     const appMessageCtx=useContext(MessageContext);
     const userCtx=useContext(UserContext);
     const user = userCtx?.user;
+    const pageCtx=useContext(PageContext);
+    const {page, setPage}=pageCtx;
     let navigate = useNavigate();
-    const location = useLocation();
+
+    useEffect(() => {
+        window.addEventListener('popstate', backHandler);
+        return () => {
+            window.removeEventListener('popstate', backHandler);
+        }
+    }, []);
+
+    const backHandler = () => {
+        console.log(window.location.pathname);
+        if(setPage) {
+            if (pages.some(p=>(p.LinkTo === window.location.pathname))){
+                setPage(window.location.pathname);
+            } else {
+                setPage(false);
+            }  
+        }
+    }
     
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [value, setValue] = useState<string | boolean>(location.pathname);
 
     const [signin, setSignin] = useState(false);
     const [login, setLogin] = useState(false);
@@ -52,18 +65,22 @@ export default function Header(){
     };
 
     const handleCloseNavMenu = (event: any) => {
-        setValue(event.target.parentElement.id);
+        if (setPage){
+            setPage(event.target.parentElement.id);
+        }   
         setAnchorElNav(null);
     };
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue);
+        if (setPage){
+            setPage(newValue);
+        } 
     };
 
     const handleCloseUserMenu = (event: any) => {
         setAnchorElUser(null);
-        if (event.currentTarget.name) {
-            setValue(false);
+        if (event.currentTarget.name && setPage) {
+            setPage(false);
             switch (event.currentTarget.name){
                 case 'login':
                     setLogin(true);
@@ -91,7 +108,9 @@ export default function Header(){
     };
 
     const handleUserItemSelect = () => {
-        setValue(false);
+        if (setPage){
+            setPage(false);
+        }
     };
 
     const handleLogout = () => {
@@ -142,9 +161,9 @@ export default function Header(){
                             display: { xs: 'block', md: 'none' },
                         }}
                         >
-                        {pages.map((page) => (
-                            <MenuItem key={page.EName} id={page.LinkTo} onClick={handleCloseNavMenu} component={Link} to={page.LinkTo}>
-                                <Typography textAlign="center">{language ? page.PName : page.EName}</Typography>
+                        {pages.map((p) => (
+                            <MenuItem key={p.EName} id={p.LinkTo} onClick={handleCloseNavMenu} component={Link} to={p.LinkTo}>
+                                <Typography textAlign="center">{language ? p.PName : p.EName}</Typography>
                             </MenuItem>
                         ))}
                     </Menu>
@@ -159,18 +178,18 @@ export default function Header(){
 
                 <Box sx={{ alignSelf: 'flex-end', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                     <Tabs
-                        value={value}
+                        value={page}
                         onChange={handleChange}
                         textColor="secondary"
                         indicatorColor="secondary"
                         aria-label="Flor tabs menu"
                         >
-                        {pages.map((page) => (
+                        {pages.map((p) => (
                         <Tab
-                            key={page.EName}
-                            value={page.LinkTo}
-                            label={language ? page.PName : page.EName}
-                            component={Link} to={page.LinkTo}
+                            key={p.EName}
+                            value={p.LinkTo}
+                            label={language ? p.PName : p.EName}
+                            component={Link} to={p.LinkTo}
                             sx={{ color: 'white', display: 'block' }}
                         />
                         ))}

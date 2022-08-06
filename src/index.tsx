@@ -10,13 +10,16 @@ import '@fontsource/cairo/700.css';
 import UserProvider from './components/UserProvider';
 import MessageProvider from './components/MessageProvider';
 import LanguageProvider from './components/LanguageProvider';
+import PageProvider from './components/PageProvider';
 
 ReactDOM.render(
   <React.StrictMode> 
     <LanguageProvider>
       <MessageProvider>
         <UserProvider>
-          <App />
+          <PageProvider>
+            <App />
+          </PageProvider>
         </UserProvider>
       </MessageProvider>
     </LanguageProvider>

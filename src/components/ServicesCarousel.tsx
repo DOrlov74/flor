@@ -1,12 +1,13 @@
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { Box, Button, MobileStepper, Paper, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { images, services } from "../content/services";
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { florSecondary } from "../theme/colors";
 import { useNavigate } from "react-router-dom";
+import { PageContext } from "./PageProvider";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -25,6 +26,8 @@ const buttonStyle = {
 }
 
 export default function ServicesCorousel(){
+    const {setPage}=useContext(PageContext); 
+    
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     const maxSteps = Object.entries(images).length;
@@ -41,6 +44,14 @@ export default function ServicesCorousel(){
     const handleStepChange = (step: number) => {
         setActiveStep(step);
     };
+
+    const handleClick = (event: any) => {
+        if (setPage){
+            setPage('/services');
+            navigate('/services');
+        }   
+    };
+
     return(
         <Box sx={{ maxWidth: 400, flexGrow: 1, position: "relative", m: 'auto'}}>
             <Paper
@@ -61,7 +72,7 @@ export default function ServicesCorousel(){
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
                 interval={5000}
-                onClick={()=>navigate('/services')}
+                onClick={handleClick}
             >
                 {services.map((step, index) => {
                     let image;

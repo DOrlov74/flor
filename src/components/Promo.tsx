@@ -7,6 +7,7 @@ import { moveInLeft } from "../theme/animation"
 import { florPrimary, florSecondary } from "../theme/colors"
 import { LangContext } from "./LanguageProvider"
 import "@fontsource/comfortaa";
+import { PageContext } from "./PageProvider"
 
 const promoStyle = {
     fontSize: {xs:'1.2rem', md:'2rem'},
@@ -84,7 +85,14 @@ const secondButtonStyle = {
 
 export default function Home() {
     const {language}=useContext(LangContext);
+    const {setPage}=useContext(PageContext);
     
+    const handleClick = (event: any) => {
+        if (setPage){
+            setPage(event.target.id);
+        }   
+    };
+
     return(
         <>
             <Stack alignItems="flex-start" sx={{m: {xs:'1rem', md:'2rem'}}}>
@@ -98,10 +106,12 @@ export default function Home() {
                     {language ? 'só por marcação' : 'by appointment'}
                 </Typography>
                 <Stack direction={'row'} spacing={5} sx={{m:{xs:'1rem 0.5rem', md:'2rem 1rem'}}}>
-                    <Button color="secondary" size="large" disableRipple sx={buttonStyle} component={Link} to="/book">
+                    <Button color="secondary" size="large" disableRipple sx={buttonStyle} 
+                        id="/book" onClick={handleClick} component={Link} to="/book">
                         {language ? 'Marcar agora' : 'Book now'}
                     </Button>
-                    <Button color="primary" size="large" disableRipple sx={secondButtonStyle} component={Link} to="/services">
+                    <Button color="primary" size="large" disableRipple sx={secondButtonStyle} 
+                        id="/services" onClick={handleClick} component={Link} to="/services">
                         {language ? 'Ver preços' : 'Prices'}
                     </Button>
                 </Stack>
