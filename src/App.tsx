@@ -23,6 +23,7 @@ import Privacy from './pages/Privacy';
 import News from './pages/News';
 import SigninAndBookForm from './components/SigninAndBookForm';
 import { MItem } from './models/Links';
+import SendMessageForm from './components/SengMessageForm';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="/privacy" element={<Privacy/>}/>
             <Route path="/signinandbook" element={<SigninAndBookForm/>}/>
             <Route path="/signinandbook/:id" element={<SigninAndBookForm/>}/>
+            <Route path="/sendmessage" element={<SendMessageForm/>}/>
           </Routes>
           </LocalizationProvider>
           <MessageAlert/>

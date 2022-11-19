@@ -107,7 +107,7 @@ export default function Home() {
                 </Typography>
                 <Stack direction={'row'} spacing={5} sx={{m:{xs:'1rem 0.5rem', md:'2rem 1rem'}}}>
                     <Button color="secondary" size="large" disableRipple sx={buttonStyle} 
-                        id="/book" onClick={handleClick} component={Link} to="/book">
+                        id="/book" onClick={handleClick} component={Link} to="/sendmessage">
                         {language ? 'Marcar agora' : 'Book now'}
                     </Button>
                     <Button color="primary" size="large" disableRipple sx={secondButtonStyle} 

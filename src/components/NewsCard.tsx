@@ -73,7 +73,7 @@ export default function NewsCard({post, newsRef}: Props){
                         <FavoriteIcon color={likes?"secondary":"disabled"}/>
                     </Badge>
                 </IconButton>
-                <Button sx={{textTransform: 'none'}} component={Link} to={'/book'} >{language ? 'Marcar a massagem' : 'Book a massage'}</Button>
+                <Button sx={{textTransform: 'none'}} component={Link} to={'/sendmessage'} >{language ? 'Marcar a massagem' : 'Book a massage'}</Button>
                 {/* <Button sx={{textTransform: 'none'}} component={Link} to={`/news/${id}`} >{language ? 'mais ...' : 'more ...'}</Button> */}
                 {(user?.role === 'admin') && 
                     <IconButton aria-label="like" onClick={handleDelete}>
