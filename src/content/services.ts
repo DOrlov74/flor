@@ -18,8 +18,8 @@ export const images = {
 export const services: Service[] = [
     {
         id: 'therapeutic',
-        name: 'Massagem terapêutica',
-        enName: 'Therapeutic massage',
+        name: 'Massagem terapêutica / desportiva',
+        enName: 'Therapeutic / sport massage',
         img: '../assets/back_opt.jpg',
         content: ['é uma massagem profunda, que promove o alivio de tensões que comprometem o bem estar do corpo. Esta massagem tem por finalidade reduzir a tensão muscular, causada muitas vezes pelo stress ou posturas incorretas que adquirimos no dia-a-dia.', 
             'Nessa massagem a pressão é direcionada a pontos específicos que desbloqueiam o fluxo energético de músculos, órgãos, nervos, vasos sanguíneos ou mesmo regiões inteiras comprometidas pelas contraturas, devolvendo ao organismo o suprimento energético que precisa para seu perfeito funcionamento.'],
@@ -30,8 +30,8 @@ export const services: Service[] = [
     },
     {
         id: 'ultrasonic',
-        name: 'Tratamento da dor ( quick massagem) 20 min/ uma zona + ultrassom',
-        enName: 'Pain treatment (quick massage) 20 min/ one zone + ultrasound',
+        name: 'Tratamento fisioterapêutico da dor ( quick massagem) 20 min/ uma zona + ultrassom',
+        enName: 'Physiotherapeutic pain treatment (quick massage) 20 min/ one zone + ultrasound',
         img: '../assets/ultra_opt.jpg',
         content: ['é uma massagem profunda, que promove o alivio de tensões que comprometem o bem-estar do corpo. Esta massagem tem por finalidade reduce muscle or joint tension and lessen pain.'],
         enContent: ['it\'s a deep massage, that promotes stress relief and the well-being of the body. This massage aims to reduce muscle tension ou articular e deminuir a dor.'],

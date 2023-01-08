@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Container, Divider, Grid, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import Footer from "../components/Footer";
 import { LangContext } from "../components/LanguageProvider";
@@ -44,9 +44,35 @@ export default function ContactsPage() {
                 <Grid item xs={12} >
                     <Card>
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                    {language ? 'Lisboa' : 'Lisbon'}
-                            </Typography>
+                                <Typography gutterBottom variant="h5" component="div">
+                                        {language ? 'Massagista Victoria' : 'Massagist Victoria'}
+                                </Typography>
+                                <Typography gutterBottom component="div" >
+                                        {language ? 'Trabalho na clínica de fisioterapia e no tempo livre faço massagem e tratamento fisioterapêutico na minha casa, no gabinete em Alfragide ou ao domicílio.' : 'I work at the physiotherapy clinic and in my free time I do massage and physiotherapy treatment at home, in the cabinete in Alfragide or at home of a client.'}
+                                </Typography>
+                                <Divider />
+                                <Typography gutterBottom component="div" >
+                                        {language ? 'Faço massagem com objectivo de tratar os sintomas que causam a dor e desconforto da função muscular.' : 'I do massage in order to treat the symptoms that cause pain and discomfort of muscle function.'}
+                                </Typography>
+                                <Divider />
+                                <Typography gutterBottom component="div" >
+                                        {language ? 'Nos casos de dores (joelhos, fascia plantar, lombar, cervical e etc) faço tratamento fisioterapeutico.  Pode ser feito na minha casa ou ao domicílio (sem marquesa). O tratamento fisioterapêutico da dor é feito com uso de aparelhos (ultrassom, TENS, estimulação) , além de massagens para relaxar os músculos tensos. Também vou indicar os exercícios para a correção postural ou fortalecimento os músculos para eliminar a causa da dor.' : 
+                                        'In cases of pain (knees, lumbar, cervical and etc) I do physiotherapeutic treatment. It can be done in my home or at home of a client (without massage table). The physiotherapeutic treatment of pain is done with the use of devices (ultrasound, TENS, stimulation), as well as massages to relax tense muscles. I will also indicate the exercises for postural correction or strengthening the muscles to eliminate the cause of pain.'}
+                                </Typography>
+                        </CardContent>
+                     </Card>
+                </Grid>
+                <Grid item xs={12} >
+                    <Card>
+                        <CardContent>
+                            <Stack direction="row" sx={{alignItems: 'flex-end'}}>
+                                <Typography gutterBottom variant="h5" component="div">
+                                        {language ? 'Lisboa' : 'Lisbon'}
+                                </Typography>
+                                <Typography gutterBottom component="div" sx={{pb: '0.25rem'}}>
+                                        {language ? ', em casa' : ', at home'}
+                                </Typography>
+                            </Stack>
                             <Box sx={mapContainerStyle} >
                                 <iframe 
                                     title="Lisbon address"
@@ -64,9 +90,14 @@ export default function ContactsPage() {
                 <Grid item xs={12} >
                     <Card>
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {language ? 'Alfragide' : 'Alfragide'}
-                            </Typography>
+                            <Stack direction="row" sx={{alignItems: 'flex-end'}}>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {language ? 'Alfragide' : 'Alfragide'}
+                                </Typography>
+                                <Typography gutterBottom component="div" sx={{pb: '0.25rem'}}>
+                                            {language ? ', no gabinete' : ', in the cabinete'}
+                                    </Typography>
+                            </Stack>
                             <Box sx={mapContainerStyle}>
                                 <iframe 
                                     title="Alfragide address"

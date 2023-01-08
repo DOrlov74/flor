@@ -24,6 +24,7 @@ import News from './pages/News';
 import SigninAndBookForm from './components/SigninAndBookForm';
 import { MItem } from './models/Links';
 import SendMessageForm from './components/SengMessageForm';
+import Workspace from './pages/Workspace';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="/vacancies" element={<Vacancies/>}/>
             <Route path="/news" element={<News/>}/>
             <Route path="/settings" element={<UserSettings/>}/>
+            <Route path="/workspace" element={<Workspace/>}/>
             <Route path="/contacts" element={<ContactsPage/>}/>
             <Route path="/privacy" element={<Privacy/>}/>
             <Route path="/signinandbook" element={<SigninAndBookForm/>}/>

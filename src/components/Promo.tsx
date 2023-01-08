@@ -103,7 +103,7 @@ export default function Home() {
                     {language ? 'em Lisboa e Alfragide' : 'in Lisbon and Alfragide'}
                 </Typography>
                 <Typography variant="h6" sx={commentStyle}>
-                    {language ? 'só por marcação' : 'by appointment'}
+                    {language ? 'só por marcação' : 'by appointment only'}
                 </Typography>
                 <Stack direction={'row'} spacing={5} sx={{m:{xs:'1rem 0.5rem', md:'2rem 1rem'}}}>
                     <Button color="secondary" size="large" disableRipple sx={buttonStyle} 
