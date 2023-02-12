@@ -8,6 +8,7 @@ import SendMessageDialog from "./SendMessageDialog";
 import TelegramIcon from '@mui/icons-material/Telegram';
 import { Link } from "react-router-dom";
 import { moveOutBottom } from "../theme/animation";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 interface Props {
     pos?: number;
@@ -41,22 +42,25 @@ export default function Footer({pos}: Props) {
         <AppBar position={pos!==undefined && pos<64 ? "fixed" : "static"} sx={checked? slideOutStyle : footerStyle } >
             <Container maxWidth="xl">
                 <Toolbar sx={{display: 'flex', flexDirection: {xs: 'column', md: 'row'} , justifyContent: 'space-around'}}>
+                    <IconButton sx={{color:'white'}} aria-label="Chat on WhatsApp" href="https://wa.me/351912383712"> 
+                        <WhatsAppIcon sx={{mx: '1rem'}}/>
                         <Typography variant={'body2'}>
-                            {addresses[0].address} 
+                            Whatsapp 
                         </Typography>
-                        <Divider color='white' orientation= "vertical" variant="middle" flexItem />
-                        <IconButton sx={{color:'white'}} onClick={()=>setMessageDialog(true)}>
-                            <TelegramIcon sx={{mx: '1rem'}} />
-                            <Typography variant={'body2'}>
-                                {language ? 'Enviar a mensagem' : 'Send a message' } 
-                            </Typography>
-                        </IconButton>
-                        <Divider color='white' orientation= "vertical" variant="middle" flexItem />
-                        <Typography variant={'body2'} 
-                            component={Link} to={'/privacy'} 
-                            sx={{color: 'white', textDecoration: 'none'}}>
-                            {language ? 'Política de privacidade' : 'Privacy policy' } 
+                    </IconButton>
+                    <Divider color='white' orientation= "vertical" variant="middle" flexItem />
+                    <IconButton sx={{color:'white'}} onClick={()=>setMessageDialog(true)}>
+                        <TelegramIcon sx={{mx: '1rem'}} />
+                        <Typography variant={'body2'}>
+                            {language ? 'Enviar a mensagem' : 'Send a message' } 
                         </Typography>
+                    </IconButton>
+                    <Divider color='white' orientation= "vertical" variant="middle" flexItem />
+                    <Typography variant={'body2'} 
+                        component={Link} to={'/privacy'} 
+                        sx={{color: 'white', textDecoration: 'none'}}>
+                        {language ? 'Política de privacidade' : 'Privacy policy' } 
+                    </Typography>
                 </Toolbar>
                 <SendMessageDialog open={messageDialog} handleClose={handleClose}/>
             </Container>
