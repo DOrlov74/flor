@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { MouseEventHandler } from "react";
 import { buttonStyle } from "../theme/styles";
-import ofertas from "../assets/valentine_day.png";
+import ofertas from "../assets/verao2023.png";
 
 interface Props {
     clickHandler: MouseEventHandler<HTMLButtonElement>;
@@ -12,6 +12,7 @@ const iconStyle = {
     top: '84px',
     right: {xs:'15px', md:'40px'},
     width: {xs:'125px', md:'250px'},
+    padding: 0,
     '&, &:link, &.visited': {
         boxShadow: '0px 3px 10px rgba(0,0,0,.25)',
         transition: 'all .2s'
@@ -27,7 +28,7 @@ const iconStyle = {
 export default function NewsLink({clickHandler}: Props){
     return(
         <Button
-            aria-label="News Link" 
+            aria-label="Sales Link" 
             onClick={clickHandler}
             sx={iconStyle}>
             <Box

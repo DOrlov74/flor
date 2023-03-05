@@ -25,7 +25,7 @@ export const services: Service[] = [
             'Nessa massagem a pressão é direcionada a pontos específicos que desbloqueiam o fluxo energético de músculos, órgãos, nervos, vasos sanguíneos ou mesmo regiões inteiras comprometidas pelas contraturas, devolvendo ao organismo o suprimento energético que precisa para seu perfeito funcionamento.'],
         enContent: ['it\'s a deep massage, that promotes stress relief and the well-being of the body. This massage aims to reduce muscle tension, often caused by stress or incorrect postures that we acquire in everyday life.', 
             'In this massage the pressure is directed to specific points that unblock the energy flow of muscles, organs, nerves, blood vessels or even entire regions, compromised by contractures, returning to the organism the energy supply it needs for its perfect functioning.'],
-        prices: [{address: 'Lisboa', price: 50}, {address: 'Alfragide', price: 65}],
+        prices: [{address: 'Lisboa', price: 40}, {address: 'Alfragide', price: 55}],
         duration: 60
     },
     {
@@ -41,7 +41,7 @@ export const services: Service[] = [
         enList: ['Applying heat to lessen pain, adhesions between tissues, muscle spasms helps the massage not to be aggressive. ( 10 min)',
             'Massage phase that unblocks the energy flow of muscles, organs, nerves, blood vessels, or entire regions compromised by contractures, returning to the organism the energy supply it needs for its perfect functioning. (45 min)',
             'Ultrasound will stimulate muscles and joints through vibrations. It will help find and relax the contracted muscle fibers and drain waste (inflammation) deposits. (7 min)'],
-        prices: [{address: 'Lisboa', price: 35}],
+        prices: [{address: 'Lisboa', price: 25}],
         duration: 30
     },
     {
@@ -57,7 +57,7 @@ export const services: Service[] = [
             'In daily activities or using wrist strength with extension movements, causes greater overload on the elbow than with flexion movements. This is one of the reasons that causes epicondylitis.',
             'Hand and arm massage will benefit the skin in this area, raise tissue temperature, blood flow that will increase the cell profit, tissue nutrition and facilitate muscle and joint work.',
             'Finishing with paraffin decreases joint stiffness and increases range of motion, makes your hands smooth, rested and beautified.'],
-        prices: [{address: 'Lisboa', price: 35}],
+        prices: [{address: 'Lisboa', price: 25}],
         duration: 45
     },
     {
@@ -95,7 +95,7 @@ export const services: Service[] = [
             'A pressoterapia é um tipo de drenagem linfática em que é utilizada um aparelho que parecem grandes botas que cobrem toda a perna, ou abdômen ou os braços. Nesse equipamento o ar enche essas \'botas\' o que pressiona as pernas de forma ritmada, o que permite mobilizar a linfa, desinchando a região. (30 min)'],
         enContent: ['For pressotherapy to have better results before using the equipment the masseuse does manual lymphatic drainage (about 10 min), for the procedure to be carried out more efficiently.',
             'Pressotherapy is a type of lymphatic drainage in which a device that looks like big boots is used that cover the entire leg or abdomen or the arms. In this equipment, the air fills these \'boots\' what presses the legs rhythmically, which allows to mobilize the lymph, deflating the region. (30 min)'],
-        prices: [{address: 'Lisboa', price: 30}],
+        prices: [{address: 'Lisboa', price: 25}],
         duration: 30
     },
 ]
