@@ -25,7 +25,7 @@ export const services: Service[] = [
             'Nessa massagem a pressão é direcionada a pontos específicos que desbloqueiam o fluxo energético de músculos, órgãos, nervos, vasos sanguíneos ou mesmo regiões inteiras comprometidas pelas contraturas, devolvendo ao organismo o suprimento energético que precisa para seu perfeito funcionamento.'],
         enContent: ['it\'s a deep massage, that promotes stress relief and the well-being of the body. This massage aims to reduce muscle tension, often caused by stress or incorrect postures that we acquire in everyday life.', 
             'In this massage the pressure is directed to specific points that unblock the energy flow of muscles, organs, nerves, blood vessels or even entire regions, compromised by contractures, returning to the organism the energy supply it needs for its perfect functioning.'],
-        prices: [{address: 'Lisboa', price: 40}, {address: 'Alfragide', price: 55}],
+        prices: [{address: 'Lisboa', price: 40}, {address: 'Alfragide', price: 0}],
         duration: 60
     },
     {

@@ -125,7 +125,7 @@ export default function ServicePage(){
                                         {p.address} 
                                     </Typography>
                                     <Typography variant="body1" color={florSecondary[900]}>
-                                        {p.price} &euro;
+                                        {p.price!=0?p.price:"sob consulta"} {p.price!=0?<span>&euro;</span>:''}
                                     </Typography>
                                 </Stack>
                                 <Divider key={`${p.address}  ${p.price}`} />
